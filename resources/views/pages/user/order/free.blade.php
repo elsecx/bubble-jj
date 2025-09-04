@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="card">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('user.order.service', ['slug' => $menu->slug]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
