@@ -20,6 +20,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
     ];
 
+    protected static function booted()
+    {
+        static::updating(function ($user) {
+            if ($user->isDirty('email')) {
+                $user->email_verified_at = null;
+                $user->sendEmailVerificationNotification();
+            }
+        });
+    }
+
     protected function casts(): array
     {
         return [

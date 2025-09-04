@@ -45,4 +45,25 @@ class EmailVerificationController extends Controller
         $user->load('role');
         return redirect()->route($user->role->redirect ?? 'user.dashboard');
     }
+
+    public function updateEmail(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        $user->email = $request->email;
+        $user->email_verified_at = null;
+        $user->save();
+
+        $user->sendEmailVerificationNotification();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Email berhasil diubah, link verifikasi baru sudah dikirim.',
+            'email'   => $user->email,
+        ]);
+    }
 }

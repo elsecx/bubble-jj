@@ -12,7 +12,8 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
         Route::get('/{slug}', 'handleView')->name('view');
     });
 
-    Route::middleware('password.confirmed')->group(function () {
-        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::middleware('password.confirmed')->prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('view');
+        Route::put('/update', [ProfileController::class, 'update'])->name('update');
     });
 });

@@ -17,22 +17,23 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center">
-                        <a href="{{ asset('assets/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}" class="glightbox"
-                            data-gallery="profile">
-                            <img src="{{ asset('assets/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}"
-                                class="rounded-circle mb-3" width="120" alt="Foto Profil">
+                        <a id="profile-preview-link" href="{{ asset('storage/images/profiles' . Auth::user()->profile->picture ?? 'default.jpg') }}"
+                            class="glightbox" data-gallery="profile">
+                            <img src="{{ asset('storage/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}"
+                                class="rounded-circle mb-3" id="profile-preview" width="120" alt="Foto Profil">
                         </a>
-                        <button type="button" class="btn btn-sm btn-primary">
+                        <label for="picture" class="btn btn-sm btn-primary">
                             Ganti Foto
-                        </button>
+                        </label>
                     </div>
 
                     <hr />
 
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form id="form-profile" action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
+                        <input type="file" name="picture" id="picture" accept="image/*" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control" name="name" id="name" value="{{ auth()->user()->name }}">
@@ -57,8 +58,8 @@
                                 value="{{ auth()->user()->profile->username_1 }}">
                         </div>
                         <div class="mb-3">
-                            <label for="username_1" class="form-label">Username Tiktok Kedua</label>
-                            <input type="text" class="form-control" name="username_1" id="username_1"
+                            <label for="username_2" class="form-label">Username Tiktok Kedua</label>
+                            <input type="text" class="form-control" name="username_2" id="username_2"
                                 placeholder="Masukkan Username tiktok kedua (Opsional)" value="{{ auth()->user()->profile->username_2 }}">
                         </div>
 
@@ -106,4 +107,59 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script data-partial="1">
+        $("#picture").on("change", function(e) {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const newSrc = event.target.result;
+
+                $("#profile-preview").attr("src", newSrc);
+                $("#profile-preview-link").css("pointer-events", "none");
+            }
+            reader.readAsDataURL(file);
+        });
+
+        $("#form-profile").on('submit', function(e) {
+            e.preventDefault();
+
+            let formElement = this;
+            let formData = new FormData(formElement);
+
+            let btnSubmit = $(this).find("button[type=submit]");
+            btnSubmit.prop("disabled", true).text("Loading...");
+
+            $.ajax({
+                url: formElement.action,
+                type: formElement.method,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showToast('success', res.message);
+                        loadPage(res.redirect);
+                        history.pushState(null, null, res.redirect);
+                    } else {
+                        showToast("error", res.message);
+                        btnSubmit.prop("disabled", false).text("Lanjut");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422 && xhr.responseJSON.errors) {
+                        const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        showToast('error', errors || "Data yang dimasukkan tidak valid");
+                    } else {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+                    btnSubmit.prop("disabled", false).text("Lanjut");
+                },
+            });
+        });
+    </script>
 @endsection

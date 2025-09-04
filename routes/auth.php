@@ -50,6 +50,7 @@ Route::middleware('auth')->prefix('email')->group(function () {
     Route::get('/', 'notice')->name('notice');
     Route::get('/{id}/{hash}', 'verify')->middleware(['signed', 'auth'])->name('verify');
     Route::post('/resend', 'resend')->name('resend');
+    Route::post('/update', 'updateEmail')->name('email.update');
   });
 });
 
