@@ -9,8 +9,11 @@
             <!-- Start::header-element -->
             <div class="header-element">
                 <div class="horizontal-logo">
-                    <a href="index.html" class="header-logo">
-                        <img src="{{ asset(SettingsHelper::get('logo')) }}" alt="logo" class="desktop-logo">
+                    <a class="header-logo" href="{{ route('user.dashboard') }}">
+                        <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
+                        <img src="{{ asset('assets/assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
+                        <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" class="desktop-dark">
+                        <img src="{{ asset('assets/images/brand-logos/toggle-dark.png') }}" alt="logo" class="toggle-dark">
                     </a>
                 </div>
             </div>
