@@ -36,11 +36,11 @@
                         <input type="file" name="picture" id="picture" accept="image/*" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" name="name" id="name" value="{{ auth()->user()->name }}">
+                            <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ auth()->user()->name }}">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" value="{{ auth()->user()->email }}">
+                            <input type="text" class="form-control form-control-sm" name="email" id="email" value="{{ auth()->user()->email }}">
                             <small class="form-text">
                                 Email digunakan untuk memulihkan password yang lupa.
                             </small>
@@ -49,13 +49,14 @@
                             <label for="no_telp" class="form-label">No. Whatsapp</label>
                             <div class="input-group">
                                 <span class="input-group-text">+62</span>
-                                <input type="text" class="form-control" id="no_telp" name="no_telp" value="{{ auth()->user()->profile->no_telp }}">
+                                <input type="text" class="form-control form-control-sm" id="no_telp" name="no_telp"
+                                    value="{{ auth()->user()->profile->no_telp }}">
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="username_1" class="form-label">Username Tiktok (Utama)</label>
-                            <input type="text" class="form-control" name="username_1" id="username_1" placeholder="Masukkan akun tiktok utama kamu"
-                                value="{{ auth()->user()->profile->username_1 }}">
+                            <input type="text" class="form-control form-control-sm" name="username_1" id="username_1"
+                                placeholder="Masukkan akun tiktok utama kamu" value="{{ auth()->user()->profile->username_1 }}">
                         </div>
                         <div class="mb-3">
                             <label for="username_2" class="form-label">Username Tiktok Kedua</label>
