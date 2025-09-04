@@ -3,7 +3,7 @@
 
 @section('content')
     {{-- Pengaturan Akun --}}
-    <div class="row">
+    <section id="profile" class="row">
         <h3 class="fw-bold mb-3">Pengaturan Akun</h3>
         <div class="card">
             <div class="card-body mb-0 pb-0">
@@ -36,10 +36,10 @@
                 </a>
             </div>
         </div>
-    </div>
+    </section>
 
     {{-- Daftar Menu Upload --}}
-    <div class="row">
+    <section id="uploads-menu" class="row">
         <h3 class="fw-bold mb-3">Daftar Menu Upload</h3>
         @foreach ($menus as $menu)
             <div class="col-md-4">
@@ -66,10 +66,10 @@
                 </div>
             </div>
         @endforeach
-    </div>
+    </section>
 
     {{-- Riwayat order & Video JJ Kamu --}}
-    <div class="row">
+    <section id="other" class="row">
         <h3 class="fw-bold mb-3">Lainnya</h3>
         <div class="card p-0">
             <div class="card-header">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
 
 @section('scripts')
