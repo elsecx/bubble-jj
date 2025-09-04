@@ -17,9 +17,9 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center">
-                        <a href="{{ asset('assets/images/profiles/' . Auth::user()->profile->profile_picture ?? 'default.jpg') }}" class="glightbox"
+                        <a href="{{ asset('assets/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}" class="glightbox"
                             data-gallery="profile">
-                            <img src="{{ asset('assets/images/profiles/' . Auth::user()->profile->profile_picture ?? 'default.jpg') }}"
+                            <img src="{{ asset('assets/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}"
                                 class="rounded-circle mb-3" width="120" alt="Foto Profil">
                         </a>
                         <button type="button" class="btn btn-sm btn-primary">

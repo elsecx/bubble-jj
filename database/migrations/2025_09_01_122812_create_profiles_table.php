@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username_1')->unique();
             $table->string('username_2')->nullable();
             $table->string('no_telp')->unique();
-            $table->string('profile_picture')->default('default.jpg');
+            $table->string('picture')->default('default.jpg');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

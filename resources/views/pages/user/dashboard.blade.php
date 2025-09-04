@@ -9,7 +9,7 @@
             <div class="card-body mb-0 pb-0">
                 <div class="main-profile-overview d-flex flex-column align-items-center justify-content-center">
                     <div class="main-img-user profile-user">
-                        <img alt="" src="{{ asset('assets/images/profiles/default.jpg') }}">
+                        <img alt="" src="{{ asset('assets/images/profiles/' . Auth::user()->profile->picture ?? 'default.jpg') }}">
                     </div>
                     <div class="text-center">
                         <h5 class="main-profile-name">{{ Auth::user()->name }}</h5>
