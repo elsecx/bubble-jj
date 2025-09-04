@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             UsersSeeder::class,
             SettingsSeeder::class,
-            UploadMenusSeeder::class,
+            UploadCategoriesSeeder::class,
         ]);
     }
 }

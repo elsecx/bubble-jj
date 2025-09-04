@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\UploadMenu;
+use App\Models\UploadCategory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UploadMenusSeeder extends Seeder
+class UploadCategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        $menus = [
+        $categories = [
             [
                 'title' => 'Foto',
                 'slug' => 'photo',
@@ -34,8 +34,8 @@ class UploadMenusSeeder extends Seeder
             ],
         ];
 
-        foreach ($menus as $menu) {
-            UploadMenu::create($menu);
+        foreach ($categories as $category) {
+            UploadCategory::create($category);
         }
     }
 }

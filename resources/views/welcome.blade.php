@@ -94,10 +94,10 @@
                 <div class="collapse" id="menu">
                     <div class="row">
                         @php
-                            use App\Models\UploadMenu;
+                            use App\Models\UploadCategory;
 
-                            $menus = UploadMenu::rememberCache('menus_all', 3600, function () {
-                                return UploadMenu::all();
+                            $menus = UploadCategory::rememberCache('menus_all', 3600, function () {
+                                return UploadCategory::all();
                             });
                         @endphp
                         @foreach ($menus as $menu)

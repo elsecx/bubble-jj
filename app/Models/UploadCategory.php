@@ -6,11 +6,12 @@ use App\Traits\Cacheable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
-class UploadMenu extends Model
+class UploadCategory extends Model
 {
     use Cacheable;
 
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     protected static function booted()
     {
