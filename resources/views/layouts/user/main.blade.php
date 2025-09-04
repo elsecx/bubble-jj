@@ -26,6 +26,10 @@
     <!-- Icons Css -->
     <link href="{{ asset('vendor/css/icons.css') }}" rel="stylesheet">
 
+    <!-- Choices Css -->
+    <link rel="stylesheet" href="{{ asset('vendor/libs/choices.js/public/assets/styles/choices.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/libs/glightbox/css/glightbox.min.css') }}">
+
     <style>
         .footer {
             position: fixed;
@@ -129,6 +133,13 @@
 
     {{-- Bootstrap JS --}}
     <script src="{{ asset('vendor/js/landing/bootstrap.min.js') }}"></script>
+
+    <!-- Choices JS -->
+    <script src="{{ asset('vendor/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+
+    <!-- Gallery JS -->
+    <script src="{{ asset('vendor/libs/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('vendor/js/gallery.js') }}"></script>
 
     <!-- Sweetalert2 JS -->
     <script src="{{ asset('vendor/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
