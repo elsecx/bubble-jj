@@ -39,7 +39,7 @@
     </section>
 
     {{-- Daftar Menu Upload --}}
-    <section id="uploads-menu" class="row">
+    <section id="upload-categories" class="row">
         <h3 class="fw-bold mb-3">Daftar Menu Upload</h3>
         @foreach ($menus as $menu)
             <div class="col-md-4">
