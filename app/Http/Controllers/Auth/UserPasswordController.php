@@ -81,7 +81,9 @@ class UserPasswordController extends Controller
 
     public function status()
     {
-        $confirmed = session()->has('password_confirmed_at') && now()->diffInMinutes(session('password_confirmed_at')) <= 5;
+        $confirmedAt = session('password_confirmed_at');
+        $confirmed = $confirmedAt && $confirmedAt->diffInMinutes(now()) <= 5;
+
         return response()->json([
             'confirmed' => $confirmed
         ]);

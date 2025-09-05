@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,12 @@ class PasswordConfirmedMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (
-            !$request->session()->get('password_confirmed_at') ||
-            now()->diffInMinutes(session('password_confirmed_at')) > 5
-        ) {
-            return redirect()->route('user.dashboard')->withErrors(['password' => 'Harap konfirmasi password terlebih dahulu.']);
+        $confirmedAt = $request->session()->get('password_confirmed_at');
+
+        if (!$confirmedAt || $confirmedAt->diffInMinutes(now()) > 5) {
+            return redirect()->route('user.dashboard')->withErrors([
+                'password' => 'Harap konfirmasi password terlebih dahulu.'
+            ]);
         }
 
         return $next($request);
