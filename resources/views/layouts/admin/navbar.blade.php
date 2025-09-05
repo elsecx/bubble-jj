@@ -11,7 +11,7 @@
                 <div class="horizontal-logo">
                     <a class="header-logo" href="{{ route('user.dashboard') }}">
                         <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
-                        <img src="{{ asset('assets/assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
+                        <img src="{{ asset('assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
                         <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" class="desktop-dark">
                         <img src="{{ asset('assets/images/brand-logos/toggle-dark.png') }}" alt="logo" class="toggle-dark">
                     </a>
@@ -45,11 +45,11 @@
                     <div class="d-flex align-items-center">
                         <div class="d-sm-flex wd-100p lh-0">
                             <div class="avatar avatar-md">
-                                <img alt="avatar" class="rounded-circle" src="{{ asset('aseets/images/profiles/default.jpg') }}">
+                                <img alt="avatar" class="rounded-circle" src="{{ asset('storage/images/profiles/default.jpg') }}">
                             </div>
                             <div class="ms-2 my-auto d-none d-xl-flex">
                                 <h6 class=" font-weight-semibold mb-0 fs-13 user-name d-sm-block d-none">
-                                    Guest
+                                    {{ Auth::user()->name }}
                                 </h6>
                             </div>
                         </div>
@@ -62,13 +62,13 @@
                     <div class="p-3 menu-header-content text-fixed-white rounded-top text-center">
                         <div class="">
                             <div class="avatar avatar-xl rounded-circle">
-                                <img alt="" class="rounded-circle" src="{{ asset('aseets/images/profiles/default.jpg') }}">
+                                <img alt="" class="rounded-circle" src="{{ asset('storage/images/profiles/default.jpg') }}">
                             </div>
                             <p class="text-fixed-white fs-18 fw-semibold mb-0">
-                                username
+                                {{ Auth::user()->email }}
                             </p>
                             <span class="fs-13 text-fixed-white">
-                                Guest
+                                {{ Auth::user()->name }}
                             </span>
                         </div>
                     </div>
@@ -76,21 +76,9 @@
                         <hr class="dropdown-divider">
                     </div>
                     <div>
-                        <a class="dropdown-item" href="#">
-                            <i class="fa fa-user me-1"></i>
-                            My Profile
-                        </a>
-                        <a class="dropdown-item" href="editprofile.html">
-                            <i class="fa fa-edit me-1"></i>
-                            Edit Profile
-                        </a>
-                        <a class="dropdown-item" href="notifications.html">
-                            <i class="fa fa-clock me-1"></i>
-                            Activity Logs
-                        </a>
                         <a class="dropdown-item" href="settings.html">
                             <i class="fa fa-sliders-h me-1"></i>
-                            Account Settings
+                            Settings
                         </a>
                         <a id="logout-btn" class="dropdown-item text-danger" href="#!">
                             <i class="fa fa-sign-out-alt me-1"></i>
