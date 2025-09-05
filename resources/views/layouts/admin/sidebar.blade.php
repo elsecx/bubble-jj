@@ -36,6 +36,17 @@
                     </a>
                 </li>
                 <!-- End::slide -->
+
+                <!-- Start::slide -->
+                <li class="slide">
+                    <a href="{{ route('admin.orders.view') }}" class="side-menu__item {{ isActive('admin.orders.*') }} spa-link">
+                        <span class="side-menu__icon">
+                            <i class='fe fe-shopping-bag'></i>
+                        </span>
+                        <span class="side-menu__label">Pesanan</span>
+                    </a>
+                </li>
+                <!-- End::slide -->
             </ul>
             <div class="slide-right" id="slide-right">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
