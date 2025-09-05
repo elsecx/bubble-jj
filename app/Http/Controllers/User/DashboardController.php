@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataJJ;
 use App\Models\Order;
 use App\Models\UploadCategory;
 use Illuminate\Http\Request;
@@ -17,10 +18,12 @@ class DashboardController extends Controller
         });
 
         $orders = Order::with('category')->where('user_id', Auth::user()->id)->get();
+        $videos = DataJJ::where('user_id', Auth::id())->where('sts_active', true)->get()->groupBy('display_type');
 
         $data = [
             'categories' => $categories,
             'orders' => $orders,
+            'videos' => $videos,
         ];
 
         return spaRender($request, 'pages.user.dashboard', $data);

@@ -118,7 +118,98 @@
                             </ol>
                         </div>
                         <div class="tab-pane" id="data-jj" role="tabpanel">
-                            Video JJ Kamu
+                            <div class="accordion" id="displayType">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#display-20"
+                                            aria-expanded="false" aria-controls="display-20">
+                                            15 detik
+                                        </button>
+                                    </h2>
+                                    <div id="display-20" class="accordion-collapse collapse" data-bs-parent="#displayType">
+                                        <div class="accordion-body">
+                                            @forelse ($videos[20] ?? [] as $video)
+                                                <div class="card">
+                                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top"
+                                                        controls></video>
+                                                    <div class="card-body">
+                                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                                            {{ formatSize($video->size) }}
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-body-secondary">
+                                                                {{ formatDate($video->updated_at) }}
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#display-30" aria-expanded="false" aria-controls="display-30">
+                                            25 detik
+                                        </button>
+                                    </h2>
+                                    <div id="display-30" class="accordion-collapse collapse" data-bs-parent="#displayType">
+                                        <div class="accordion-body">
+                                            @forelse ($videos[30] ?? [] as $video)
+                                                <div class="card">
+                                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top"
+                                                        controls></video>
+                                                    <div class="card-body">
+                                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                                            {{ formatSize($video->size) }}
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-body-secondary">
+                                                                {{ formatDate($video->updated_at) }}
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#display-99" aria-expanded="false" aria-controls="display-99">
+                                            60 detik
+                                        </button>
+                                    </h2>
+                                    <div id="display-99" class="accordion-collapse collapse" data-bs-parent="#displayType">
+                                        <div class="accordion-body">
+                                            @forelse ($videos[99] ?? [] as $video)
+                                                <div class="card">
+                                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top"
+                                                        controls></video>
+                                                    <div class="card-body">
+                                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                                            {{ formatSize($video->size) }}
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-body-secondary">
+                                                                {{ formatDate($video->updated_at) }}
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

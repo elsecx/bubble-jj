@@ -218,21 +218,28 @@ function initUploadHandler(options) {
         e.preventDefault();
         toggleButton(false);
 
-        if (multiple) {
-            if (filesArray.length === 0) {
-                showToast("error", "Pilih minimal 1 file!");
-                toggleButton(true);
-                return;
-            }
-            let checkNext = (i) => {
-                if (i >= filesArray.length) return submitAjax();
-                validateFile(filesArray[i], () => checkNext(i + 1));
+        $.get(passwordCheckUrl, function (res) {
+            let processUpload = () => {
+                if (multiple) {
+                    if (filesArray.length === 0) {
+                        showToast("error", "Pilih minimal 1 file!");
+                        toggleButton(true);
+                        return;
+                    }
+                    let checkNext = (i) => {
+                        if (i >= filesArray.length) return submitAjax();
+                        validateFile(filesArray[i], () => checkNext(i + 1));
+                    };
+                    checkNext(0);
+                } else {
+                    let fileInput = $fileInput[0]?.files[0];
+                    validateFile(fileInput, submitAjax);
+                }
             };
-            checkNext(0);
-        } else {
-            let fileInput = $fileInput[0]?.files[0];
-            validateFile(fileInput, submitAjax);
-        }
+
+            if (res.confirmed) processUpload();
+            else confirmPassword(processUpload);
+        });
     });
 
     // Event preview
@@ -259,11 +266,4 @@ function initUploadHandler(options) {
             }
         });
     }
-
-    // Event reset file
-    $("#reset_file_btn").on("click", function () {
-        filesArray = [];
-        if ($fileInput.length) $fileInput.val("");
-        if ($previewContainer) $previewContainer.html("");
-    });
 }

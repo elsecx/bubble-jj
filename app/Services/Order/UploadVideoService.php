@@ -44,7 +44,7 @@ class UploadVideoService
                     'notes' => $request->notes,
                 ]);
 
-                $path = $file->store('order/video', 'public');
+                $path = $file->store('orders/video', 'public');
                 $filename = basename($path);
 
                 File::create([
