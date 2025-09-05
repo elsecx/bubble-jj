@@ -79,10 +79,97 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="uploadResult" tabindex="-1" aria-labelledby="uploadResultLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('POST')
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="uploadResultLabel">Upload Hasil</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="file_result_input">Video JJ</label>
+                            <input type="file" class="form-control" name="file_result" id="file_result_input" accept="video/*">
+                        </div>
+                        <div class="mb-3">
+                            <label for="proof_payment">Bukti Transfer</label>
+                            <input type="file" class="form-control" name="proof_payment" id="proof_payment" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalReject" tabindex="-1" aria-labelledby="modalRejectLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="form-reject" action="{{ route('admin.orders.reject', $order->id) }}" method="POST">
+                    @csrf
+                    @method('POST')
+
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalRejectLabel">Alasan Ditolak</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="reject_reason">Alasan</label>
+                        <textarea class="form-control" id="reject_reason" name="reject_reason" rows="3" placeholder="Masukkan alasan disini..."></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     <script data-partial="1">
-        // 
+        $("#form-reject").on("submit", function(e) {
+            e.preventDefault();
+
+            let form = $(this);
+            let btnSubmit = form.find("button[type=submit]");
+
+            btnSubmit.prop("disabled", true).text("Loading...");
+
+            $.ajax({
+                url: form.attr("action"),
+                type: form.attr("method"),
+                data: form.serialize(),
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showToast('success', res.message);
+                        loadPage(res.redirect);
+                        history.pushState(null, null, res.redirect);
+                    } else {
+                        showToast("error", res.message);
+                        btnSubmit.prop("disabled", false).text("Lanjut");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422 && xhr.responseJSON.errors) {
+                        const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        showToast('error', errors || "Data yang dimasukkan tidak valid");
+                    } else {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+
+                    btnSubmit.prop("disabled", false).text("Lanjut");
+                },
+            });
+        });
     </script>
 @endsection

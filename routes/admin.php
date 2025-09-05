@@ -11,5 +11,7 @@ Route::middleware(['role:super,admin', 'auth', 'verified'])->prefix('admin')->na
     Route::get('/', 'index')->name('view');
     Route::get('/data', 'data')->name('data');
     Route::get('{order}', 'show')->name('show');
+
+    Route::post('/reject/{order}', 'reject')->name('reject');
   });
 });

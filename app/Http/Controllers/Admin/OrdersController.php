@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 
 class OrdersController extends Controller
@@ -63,5 +64,42 @@ class OrdersController extends Controller
         return spaRender($request, 'pages.admin.orders.detail', [
             'order' => $order
         ]);
+    }
+
+    public function reject(Request $request, Order $order)
+    {
+        try {
+            $request->validate([
+                'reject_reason' => 'required|string|max:1000',
+            ]);
+
+            $order->files()->each(function ($file) {
+                if (\Illuminate\Support\Facades\Storage::disk('public')->exists($file->filename)) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($file->filename);
+                }
+                $file->delete();
+            });
+
+            $order->update([
+                'status' => 'rejected',
+                'reject_reason' => $request->reject_reason,
+            ]);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Pesanan berhasil ditolak dan file terkait telah dihapus.',
+                'redirect' => route('admin.orders.view'),
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => implode(', ', $e->validator->errors()->all()),
+            ], 422);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage() ?? 'Terjadi kesalahan',
+            ], 500);
+        }
     }
 }
