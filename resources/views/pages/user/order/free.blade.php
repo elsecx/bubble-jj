@@ -27,7 +27,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="display_type">Pilih Jenis Tampil</label>
-                        <select class="form-select form-select-sm" name="display_type" id="display_type" required>
+                        <select class="form-select form-select-sm" name="display_type" id="display_type">
                             <option selected disabled>=== Pilih Jenis Tampil JJ ===</option>
                             <option value="20">Jenis JJ Coin 20 : 15 detik</option>
                             <option value="30">Jenis JJ Coin 30 : 25 detik</option>
