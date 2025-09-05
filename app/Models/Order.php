@@ -12,12 +12,12 @@ class Order extends Model
         'id',
     ];
 
-    protected function user(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    protected function category(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(UploadCategory::class, 'category_id');
     }
