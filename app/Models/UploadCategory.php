@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Cacheable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 
 class UploadCategory extends Model
@@ -22,5 +23,10 @@ class UploadCategory extends Model
         static::deleted(function ($menu) {
             Cache::forget('menus_all');
         });
+    }
+
+    protected function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

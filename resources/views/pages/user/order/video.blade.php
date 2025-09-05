@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="card">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form id="form-upload" action="{{ route('user.order.service', ['slug' => $menu->slug]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -23,10 +23,11 @@
                     <div class="mb-3">
                         <label for="file">Pilih File {{ $menu->title }}</label>
                         <input class="form-control form-control-sm " type="file" id="file" name="file" accept="video/*">
+                        <div id="preview-container" class="d-flex flex-wrap mt-3"></div>
                     </div>
                     <div class="mb-3">
                         <label for="display_type">Pilih Jenis Tampil</label>
-                        <select class="form-select form-select-sm" name="display_type" id="display_type" required>
+                        <select class="form-select form-select-sm" name="display_type" id="display_type">
                             <option selected disabled>=== Pilih Jenis Tampil JJ ===</option>
                             <option value="20">Jenis JJ Coin 20 : 15 detik</option>
                             <option value="30">Jenis JJ Coin 30 : 25 detik</option>
@@ -52,4 +53,15 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('assets/js/order.js') }}" data-partial="1"></script>
+    <script data-partial="1">
+        initUploadHandler({
+            previewSelector: "#preview-container",
+            previewType: "video",
+            passwordCheckUrl: "{{ route('password.status') }}",
+        });
+    </script>
 @endsection

@@ -25,6 +25,7 @@ class OrderController extends Controller
             case 'photo':
                 break;
             case 'video':
+                return Order\UploadVideoService::handle($request, $category);
                 break;
             case 'free':
                 return Order\UploadFreeService::handle($request, $category);
