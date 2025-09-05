@@ -16,7 +16,7 @@ class OrdersController extends Controller
 
     public function data(Request $request)
     {
-        $orders = Order::with('user', 'category');
+        $orders = Order::with('user.profile', 'category');
 
         if ($request->status) {
             $orders->where('status', $request->status);
@@ -49,10 +49,19 @@ class OrdersController extends Controller
             })
             ->editColumn('created_at', fn($row) => formatDate($row->created_at))
             ->addColumn('action', function ($row) {
-                // $detailUrl = route('order.show', $row->id);
-                return "<a href='#' class='btn btn-sm btn-info spa-link'>Detail</a>";
+                $detailUrl = route('admin.orders.show', $row->id);
+                return "<a href='{$detailUrl}' class='btn btn-sm btn-info spa-link'>Detail</a>";
             })
             ->rawColumns(['status', 'action'])
             ->make(true);
+    }
+
+    public function show(Request $request, Order $order)
+    {
+        $order->load('user.profile', 'category');
+
+        return spaRender($request, 'pages.admin.orders.detail', [
+            'order' => $order
+        ]);
     }
 }

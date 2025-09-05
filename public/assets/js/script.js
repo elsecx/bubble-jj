@@ -11,9 +11,11 @@ function loader(status) {
 // Link click handler
 function setActiveLink(url) {
     $(".spa-link").removeClass("active");
+
     $(".spa-link").each(function () {
         const href = $(this).attr("href");
-        if (url === href) {
+
+        if (url.startsWith(href)) {
             $(this).addClass("active");
         }
     });
