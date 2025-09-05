@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="card">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form id="form-upload" action="{{ route('user.order.service', ['slug' => $menu->slug]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="display_type">Pilih Jenis Tampil</label>
-                        <select class="form-select form-select-sm" name="display_type" id="display_type" required>
+                        <select class="form-select form-select-sm" name="display_type" id="display_type">
                             <option selected disabled>=== Pilih Jenis Tampil JJ ===</option>
                             <option value="20">Jenis JJ Coin 20 : 15 detik</option>
                             <option value="30">Jenis JJ Coin 30 : 25 detik</option>
@@ -58,4 +58,16 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('assets/js/order.js') }}" data-partial="1"></script>
+    <script data-partial="1">
+        initUploadHandler({
+            previewSelector: "#preview-container",
+            previewType: "image",
+            multiple: true,
+            passwordCheckUrl: "{{ route('password.status') }}",
+        });
+    </script>
 @endsection

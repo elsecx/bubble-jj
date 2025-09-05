@@ -11,7 +11,7 @@ function initUploadHandler(options) {
 
     const $form = $(formSelector);
     const $btnSubmit = $form.find("button[type=submit]");
-    const $fileInput = $form.find("input[name=file]");
+    const $fileInput = $form.find("input[name='file'], input[name='files[]']");
     const $previewContainer = previewSelector ? $(previewSelector) : null;
 
     let filesArray = [];
@@ -218,13 +218,21 @@ function initUploadHandler(options) {
         e.preventDefault();
         toggleButton(false);
 
-        let fileInput = multiple ? filesArray[0] : $fileInput[0]?.files[0];
-
-        $.get(passwordCheckUrl, function (res) {
-            let processUpload = () => validateFile(fileInput, submitAjax);
-            if (res.confirmed) processUpload();
-            else confirmPassword(processUpload);
-        });
+        if (multiple) {
+            if (filesArray.length === 0) {
+                showToast("error", "Pilih minimal 1 file!");
+                toggleButton(true);
+                return;
+            }
+            let checkNext = (i) => {
+                if (i >= filesArray.length) return submitAjax();
+                validateFile(filesArray[i], () => checkNext(i + 1));
+            };
+            checkNext(0);
+        } else {
+            let fileInput = $fileInput[0]?.files[0];
+            validateFile(fileInput, submitAjax);
+        }
     });
 
     // Event preview
@@ -251,4 +259,11 @@ function initUploadHandler(options) {
             }
         });
     }
+
+    // Event reset file
+    $("#reset_file_btn").on("click", function () {
+        filesArray = [];
+        if ($fileInput.length) $fileInput.val("");
+        if ($previewContainer) $previewContainer.html("");
+    });
 }

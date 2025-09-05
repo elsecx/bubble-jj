@@ -23,6 +23,7 @@ class OrderController extends Controller
 
         switch ($category->slug) {
             case 'photo':
+                return Order\UploadPhotosService::handle($request, $category);
                 break;
             case 'video':
                 return Order\UploadVideoService::handle($request, $category);
