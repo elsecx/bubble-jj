@@ -38,16 +38,16 @@
         </div>
     </section>
 
-    {{-- Daftar Menu Upload --}}
+    {{-- Daftar Kategori Upload --}}
     <section id="upload-categories" class="row">
-        <h3 class="fw-bold mb-3">Daftar Menu Upload</h3>
-        @foreach ($menus as $menu)
+        <h3 class="fw-bold mb-3">Daftar Kategori Upload</h3>
+        @foreach ($categories as $category)
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="fw-bold">{{ $menu->title }}</h4>
-                            <h6 class="fw-bold text-success">{{ $menu->price }}</h6>
+                            <h4 class="fw-bold">{{ $category->title }}</h4>
+                            <h6 class="fw-bold text-success">{{ $category->price }}</h6>
                         </div>
                     </div>
                     <div class="card-body pb-0">
@@ -55,11 +55,11 @@
                             Keterangan:
                         </h6>
                         <p>
-                            {{ $menu->description }}
+                            {{ $category->description }}
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('user.order.view', ['slug' => $menu->slug]) }}" class="btn btn-primary spa-link">
+                        <a href="{{ route('user.order.view', ['slug' => $category->slug]) }}" class="btn btn-primary spa-link">
                             Pilih
                         </a>
                     </div>
@@ -87,8 +87,35 @@
                 </ul>
                 <div class="card-body p-0">
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="history" role="tabpanel">
-                            Riwayat Order
+                        <div class="tab-pane show active border-0 p-0" id="history" role="tabpanel">
+                            <ol class="list-group list-group-numbered">
+                                @foreach ($orders as $order)
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto">
+                                            <span class="font-monospace text-secondary">
+                                                05 Sep 2025 10:26
+                                            </span>
+                                            <div class="d-flex gap-2">
+                                                <h5 class="fw-bold">
+                                                    {{ $order->category->title }}
+                                                </h5>
+                                                <span class="badge text-bg-warning" style="height: fit-content;">
+                                                    Pending
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-col gap-2">
+                                            <a href="" class="btn btn-sm btn-primary">
+                                                Detail
+                                                <i class="fe fe-corner-down-right text-white"></i>
+                                            </a>
+                                            <h6 class="fw-bold text-success">
+                                                {{ $order->category->price }}
+                                            </h6>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ol>
                         </div>
                         <div class="tab-pane" id="data-jj" role="tabpanel">
                             Video JJ Kamu
