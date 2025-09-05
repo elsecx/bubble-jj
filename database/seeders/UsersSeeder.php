@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder
 
         User::create([
             'name' => 'Super User',
-            'email' => 'super@example.com',
+            'email' => 'super',
             'password' => bcrypt('super'),
             'email_verified_at' => now(),
             'is_active' => true,
@@ -28,7 +28,7 @@ class UsersSeeder extends Seeder
 
         User::create([
             'name' => 'Admin User',
-            'email' => 'adminuser@example.com',
+            'email' => 'admin',
             'password' => bcrypt('admin'),
             'email_verified_at' => now(),
             'is_active' => true,
