@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use getID3;
 use App\Http\Controllers\Controller;
+use App\Models\DataJJ;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTables;
 
@@ -66,6 +70,80 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function result(Request $request, Order $order)
+    {
+        try {
+            $request->validate([
+                'file_result'   => 'required|mimes:mp4,avi,mpeg,quicktime,wmv|max:2560', // max 2.5MB
+                'proof_payment' => 'required|image|max:2560', // max 2.5MB
+            ]);
+
+            if ($request->hasFile('file_result')) {
+                $videoFile = $request->file('file_result');
+                $proofFile = $request->file('proof_payment');
+
+                $getID3 = new getID3();
+                $fileInfo = $getID3->analyze($videoFile->getPathname());
+                $duration = $fileInfo['playtime_seconds'] ?? 0;
+
+                if ($duration > 60) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Durasi video melebihi 60 detik.',
+                    ], 422);
+                }
+
+                DB::beginTransaction();
+
+                $path = $videoFile->store('videojj', 'public');
+                $filename = basename($path);
+
+                $proofPath = $proofFile->store('bukti_trf', 'public');
+                $proofFilename = basename($proofPath);
+
+                $order->update([
+                    'proof_payment' => $proofFilename,
+                    'status'        => 'approved',
+                ]);
+
+                DataJJ::updateOrCreate(
+                    [
+                        'user_id' => $order->user_id,
+                        'username_1' => $order->user->profile->username_1,
+                    ],
+                    [
+                        'username_2' => $order->user->profile->username_2,
+                        'display_type' => $order->display_type ?? 20,
+                        'filename'   => $filename,
+                        'duration'   => round($duration),
+                        'size'       => $videoFile->getSize(),
+                        'sts_active' => true,
+                    ]
+                );
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Video dan bukti transfer berhasil diupload!',
+                'redirect' => route('admin.orders.view'),
+            ]);
+        } catch (ValidationException $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => implode(', ', $e->validator->errors()->all()),
+            ], 422);
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage() ?? 'Terjadi kesalahan',
+            ], 500);
+        }
+    }
+
     public function reject(Request $request, Order $order)
     {
         try {
@@ -74,8 +152,8 @@ class OrdersController extends Controller
             ]);
 
             $order->files()->each(function ($file) {
-                if (\Illuminate\Support\Facades\Storage::disk('public')->exists($file->filename)) {
-                    \Illuminate\Support\Facades\Storage::disk('public')->delete($file->filename);
+                if (Storage::disk('public')->exists($file->filename)) {
+                    Storage::disk('public')->delete($file->filename);
                 }
                 $file->delete();
             });

@@ -83,7 +83,7 @@
     <div class="modal fade" id="uploadResult" tabindex="-1" aria-labelledby="uploadResultLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form id="form-result" action="{{ route('admin.orders.result', $order->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
 
@@ -137,6 +137,48 @@
 
 @section('scripts')
     <script data-partial="1">
+        $("#form-result").on("submit", function(e) {
+            e.preventDefault();
+
+            let form = $(this);
+            let formData = new FormData(this);
+            let btnSubmit = form.find("button[type=submit]");
+
+            btnSubmit.prop("disabled", true).text("Loading...");
+
+            $.ajax({
+                url: form.attr("action"),
+                type: form.attr("method"),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showToast('success', res.message);
+
+                        $('#uploadResult').modal('hide');
+
+                        loadPage(res.redirect);
+                        history.pushState(null, null, res.redirect);
+                    } else {
+                        showToast("error", res.message);
+                        btnSubmit.prop("disabled", false).text("Lanjut");
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseJSON?.message);
+                    if (xhr.status === 422 && xhr.responseJSON.errors) {
+                        const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        showToast('error', errors || "Data yang dimasukkan tidak valid");
+                    } else {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+
+                    btnSubmit.prop("disabled", false).text("Lanjut");
+                },
+            });
+        });
+
         $("#form-reject").on("submit", function(e) {
             e.preventDefault();
 
@@ -152,6 +194,9 @@
                 success: function(res) {
                     if (res.status === 'success') {
                         showToast('success', res.message);
+
+                        $('#modalReject').modal('hide');
+
                         loadPage(res.redirect);
                         history.pushState(null, null, res.redirect);
                     } else {
