@@ -37,3 +37,37 @@ if (!function_exists('formatSize')) {
     return round($bytes, $precision) . $units[$pow];
   }
 }
+
+if (!function_exists('formatDate')) {
+  function formatDate($date, $withTime = true)
+  {
+    if (!$date) {
+      return null;
+    }
+
+    $bulanIndo = [
+      1 => 'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'Mei',
+      'Jun',
+      'Jul',
+      'Agu',
+      'Sep',
+      'Okt',
+      'Nov',
+      'Des'
+    ];
+
+    $timestamp = strtotime($date);
+    $day   = date('d', $timestamp);
+    $month = $bulanIndo[(int)date('m', $timestamp)];
+    $year  = date('Y', $timestamp);
+    $time  = date('H:i', $timestamp);
+
+    return $withTime
+      ? "{$day} {$month} {$year} {$time}"
+      : "{$day} {$month} {$year}";
+  }
+}

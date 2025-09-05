@@ -93,7 +93,7 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
                                             <span class="font-monospace text-secondary">
-                                                05 Sep 2025 10:26
+                                                {{ formatDate($order->created_at) }}
                                             </span>
                                             <div class="d-flex gap-2">
                                                 <h5 class="fw-bold">
