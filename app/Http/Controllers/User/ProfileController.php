@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataJJ;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,8 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        return spaRender($request, 'pages.user.profile');
+        $data['videos'] = DataJJ::where('user_id', Auth::id())->where('sts_active', true)->get()->groupBy('display_type');
+        return spaRender($request, 'pages.user.profile', $data);
     }
 
     public function update(Request $request)

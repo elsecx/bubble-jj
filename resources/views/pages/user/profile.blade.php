@@ -73,7 +73,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header pb-0 mb-0">
-                    <h5 class="fw-bold">Video JJ</h5>
+                    <h5 class="fw-bold">Video JJ Kamu</h5>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-pills justify-content-start nav-style-3 mb-3" role="tablist">
@@ -95,13 +95,61 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane show active" id="20" role="tabpanel">
-                            Jenis JJ koin 20
+                            @forelse ($videos[20] ?? [] as $video)
+                                <div class="card">
+                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>
+                                    <div class="card-body">
+                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                            {{ formatSize($video->size) }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                {{ formatDate($video->updated_at) }}
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                            @endforelse
                         </div>
                         <div class="tab-pane show" id="30" role="tabpanel">
-                            Jenis JJ koin 30
+                            @forelse ($videos[30] ?? [] as $video)
+                                <div class="card">
+                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>
+                                    <div class="card-body">
+                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                            {{ formatSize($video->size) }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                {{ formatDate($video->updated_at) }}
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                            @endforelse
                         </div>
                         <div class="tab-pane show" id="99" role="tabpanel">
-                            Jenis JJ koin 99
+                            @forelse ($videos[99] ?? [] as $video)
+                                <div class="card">
+                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>
+                                    <div class="card-body">
+                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                            {{ formatSize($video->size) }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                {{ formatDate($video->updated_at) }}
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                            @endforelse
                         </div>
                     </div>
                 </div>
