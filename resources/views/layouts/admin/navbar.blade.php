@@ -45,7 +45,7 @@
                     <div class="d-flex align-items-center">
                         <div class="d-sm-flex wd-100p lh-0">
                             <div class="avatar avatar-md">
-                                <img alt="avatar" class="rounded-circle" src="{{ asset('storage/images/profiles/default.jpg') }}">
+                                <img alt="avatar" class="rounded-circle" src="{{ asset('assets/images/profile.jpg') }}">
                             </div>
                             <div class="ms-2 my-auto d-none d-xl-flex">
                                 <h6 class=" font-weight-semibold mb-0 fs-13 user-name d-sm-block d-none">
@@ -62,7 +62,7 @@
                     <div class="p-3 menu-header-content text-fixed-white rounded-top text-center">
                         <div class="">
                             <div class="avatar avatar-xl rounded-circle">
-                                <img alt="" class="rounded-circle" src="{{ asset('storage/images/profiles/default.jpg') }}">
+                                <img alt="" class="rounded-circle" src="{{ asset('assets/images/profile.jpg') }}">
                             </div>
                             <p class="text-fixed-white fs-18 fw-semibold mb-0">
                                 {{ Auth::user()->email }}

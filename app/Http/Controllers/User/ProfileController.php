@@ -46,7 +46,11 @@ class ProfileController extends Controller
             $fileExtension = $request->picture->extension();
             $fileName = preg_replace('/[^a-zA-Z0-9-_]/', '_', $user->name) . '.' . $fileExtension;
 
-            if ($profile->picture && Storage::disk('public')->exists('images/profiles/' . $profile->picture)) {
+            if (
+                $profile->picture
+                && $profile->picture !== 'default.jpg'
+                && Storage::disk('public')->exists('images/profiles/' . $profile->picture)
+            ) {
                 Storage::disk('public')->delete('images/profiles/' . $profile->picture);
             }
 
