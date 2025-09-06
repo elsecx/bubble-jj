@@ -49,12 +49,12 @@ class ProfileController extends Controller
             if (
                 $profile->picture
                 && $profile->picture !== 'default.jpg'
-                && Storage::disk('public')->exists('images/profiles/' . $profile->picture)
+                && Storage::disk('public')->exists('profiles/' . $profile->picture)
             ) {
-                Storage::disk('public')->delete('images/profiles/' . $profile->picture);
+                Storage::disk('public')->delete('profiles/' . $profile->picture);
             }
 
-            $request->picture->storeAs('images/profiles', $fileName, 'public');
+            $request->picture->storeAs('profiles', $fileName, 'public');
             $profile->picture = $fileName;
         }
 
