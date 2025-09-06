@@ -8,16 +8,18 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
                         <h5 class="fw-bold fs-5">Pesanan <mark>{{ $order->user->name }}</mark></h5>
-                        <div class="d-flex-align-items-center gap-3">
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalReject">
-                                <i class='fe fe-x'></i>
-                                Tolak
-                            </button>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalResult">
-                                <i class='fe fe-upload'></i>
-                                Upload hasil
-                            </button>
-                        </div>
+                        @if ($order->status === 'pending')
+                            <div class="d-flex align-items-center gap-3">
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalReject">
+                                    <i class='fe fe-x'></i>
+                                    Tolak
+                                </button>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalResult">
+                                    <i class='fe fe-upload'></i>
+                                    Upload hasil
+                                </button>
+                            </div>
+                        @endif
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <h6 class="fs-6 fst-italic">
