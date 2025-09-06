@@ -17,7 +17,7 @@ class DashboardController extends Controller
             return UploadCategory::all();
         });
 
-        $orders = Order::with('category')->where('user_id', Auth::user()->id)->get();
+        $orders = Order::with('category')->where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->get();
         $videos = DataJJ::where('user_id', Auth::id())->where('sts_active', true)->get()->groupBy('display_type');
 
         $data = [
