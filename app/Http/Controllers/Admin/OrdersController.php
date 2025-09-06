@@ -43,14 +43,7 @@ class OrdersController extends Controller
                 return $short;
             })
             ->editColumn('status', function ($row) {
-                $status = ucfirst($row->status);
-                $badgeClass = match ($row->status) {
-                    'approved' => 'bg-success',
-                    'rejected' => 'bg-danger',
-                    'pending'  => 'bg-warning',
-                    default    => 'bg-secondary',
-                };
-                return "<span class='badge {$badgeClass}'>{$status}</span>";
+                return "<span class='badge text-bg-{$row->status_color}'>{$row->status_label}</span>";
             })
             ->editColumn('created_at', fn($row) => formatDate($row->created_at))
             ->addColumn('action', function ($row) {

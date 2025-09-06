@@ -99,8 +99,8 @@
                                                 <h5 class="fw-bold">
                                                     {{ $order->category->title }}
                                                 </h5>
-                                                <span class="badge text-bg-warning" style="height: fit-content;">
-                                                    Pending
+                                                <span class="badge text-bg-{{ $order->status_color }}" style="height: fit-content;">
+                                                    {{ $order->status_label }}
                                                 </span>
                                             </div>
                                         </div>

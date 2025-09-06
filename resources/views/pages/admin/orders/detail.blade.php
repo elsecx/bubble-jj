@@ -25,13 +25,9 @@
                         <h6 class="fs-6 fst-italic">
                             Jenis pesanan: {{ $order->category->title }}
                         </h6>
-                        @if ($order->status == 'pending')
-                            <span class="badge bg-warning">{{ ucfirst($order->status) }}
-                            @elseif ($order->status == 'approved')
-                                <span class="badge bg-success">{{ ucfirst($order->status) }}
-                                @elseif ($order->status == 'rejected')
-                                    <span class="badge bg-danger">{{ ucfirst($order->status) }}
-                        @endif
+                        <span class="badge text-bg-{{ $order->status_color }}">
+                            {{ $order->status_label }}
+                        </span>
                     </div>
                 </div>
 
