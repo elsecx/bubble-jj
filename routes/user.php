@@ -9,14 +9,16 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::controller(OrderController::class)->group(function () {
-        Route::get('/upload/{slug}', 'handleView')->name('view');
-        Route::post('/upload/{slug}', 'handleService')->middleware('password.confirmed')->name('service');
+        Route::prefix('upload')->name('upload.')->group(function () {
+            Route::get('/{slug}', 'handleView')->name('view');
+            Route::post('/{slug}', 'handleService')->middleware('password.confirmed')->name('service');
+        });
 
-        // Detail Order
-        Route::get('/{order}', 'show')->name('show');
-
-        // Delete Order
-        Route::delete('{order}', 'destroy')->name('destroy');
+        // Detail and Destroy Order
+        Route::prefix('order')->name('order.')->group(function () {
+            Route::get('/{order}', 'show')->whereNumber('order')->name('show');
+            Route::delete('{order}', 'destroy')->whereNumber('order')->name('destroy');
+        });
     });
 
     Route::middleware('password.confirmed')->prefix('profile')->name('profile.')->group(function () {

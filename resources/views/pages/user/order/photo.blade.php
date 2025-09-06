@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="card">
-            <form id="form-upload" action="{{ route('user.order.service', ['slug' => $menu->slug]) }}" method="POST" enctype="multipart/form-data">
+            <form id="form-upload" action="{{ route('user.upload.service', ['slug' => $menu->slug]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
 

@@ -59,7 +59,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('user.order.view', ['slug' => $category->slug]) }}" class="btn btn-primary spa-link">
+                        <a href="{{ route('user.upload.view', ['slug' => $category->slug]) }}" class="btn btn-primary spa-link">
                             Pilih
                         </a>
                     </div>
