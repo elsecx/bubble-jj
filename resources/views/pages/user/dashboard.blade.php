@@ -89,7 +89,7 @@
                     <div class="tab-content">
                         <div class="tab-pane show active border-0 p-0" id="history" role="tabpanel">
                             <ol class="list-group list-group-numbered">
-                                @foreach ($orders as $order)
+                                @forelse ($orders as $order)
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                         <div class="ms-2 me-auto">
                                             <span class="font-monospace text-secondary">
@@ -114,7 +114,11 @@
                                             </h6>
                                         </div>
                                     </li>
-                                @endforeach
+                                @empty
+                                    <li class="list-group-item text-center text-muted">
+                                        Belum ada riwayat order.
+                                    </li>
+                                @endforelse
                             </ol>
                         </div>
                         <div class="tab-pane" id="data-jj" role="tabpanel">
