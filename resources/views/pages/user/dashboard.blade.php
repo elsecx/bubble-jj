@@ -68,7 +68,7 @@
         @endforeach
     </section>
 
-    {{-- Riwayat order & Video JJ Kamu --}}
+    {{-- Riwayat pesanan & Video JJ Kamu --}}
     <section id="other" class="row">
         <h3 class="fw-bold mb-3">Lainnya</h3>
         <div class="card p-0">
@@ -76,7 +76,7 @@
                 <ul class="nav nav-pills justify-content-start nav-style-3 mb-3" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#history" aria-selected="true">
-                            Riwayat Order
+                            Riwayat Pesanan
                         </a>
                     </li>
                     <li class="nav-item">
