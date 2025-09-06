@@ -34,11 +34,11 @@ class UploadPhotosService
 
                 foreach ($request->file('files') as $file) {
                     $path = $file->store('orders/photos', 'public');
-                    $filename = basename($path);
+                    // $filename = basename($path);
 
                     File::create([
                         'order_id' => $order->id,
-                        'filename' => $filename,
+                        'filename' => $path,
                         'duration' => null,
                         'size' => $file->getSize(),
                     ]);

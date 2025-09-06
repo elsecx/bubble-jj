@@ -45,11 +45,11 @@ class UploadVideoService
                 ]);
 
                 $path = $file->store('orders/video', 'public');
-                $filename = basename($path);
+                // $filename = basename($path);
 
                 File::create([
                     'order_id' => $order->id,
-                    'filename' => $filename,
+                    'filename' => $path,
                     'duration' => round($duration),
                     'size' => $file->getSize(),
                 ]);
