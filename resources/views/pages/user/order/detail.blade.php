@@ -78,10 +78,12 @@
                                                 Durasi: {{ $file->duration ?? 0 }} detik <br>
                                                 Ukuran: {{ formatSize($file->size) }}
                                             </p>
-                                            <button type="button" class="btn btn-sm btn-danger mt-auto btn-delete-file"
-                                                data-url="{{ route('user.order.file.remove', $file->id) }}">
-                                                <i class='fe fe-trash'></i> Hapus
-                                            </button>
+                                            @if ($order->status === 'pending')
+                                                <button type="button" class="btn btn-sm btn-danger mt-auto btn-delete-file"
+                                                    data-url="{{ route('user.order.file.remove', $file->id) }}">
+                                                    <i class='fe fe-trash'></i> Hapus
+                                                </button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
