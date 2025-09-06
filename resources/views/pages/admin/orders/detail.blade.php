@@ -182,8 +182,11 @@
             e.preventDefault();
 
             let form = $(this);
-            let btnSubmit = form.find("button[type=submit]");
 
+            const modalEl = document.getElementById("modalReject");
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+
+            let btnSubmit = form.find("button[type=submit]");
             btnSubmit.prop("disabled", true).text("Loading...");
 
             $.ajax({
@@ -194,7 +197,7 @@
                     if (res.status === 'success') {
                         showToast('success', res.message);
 
-                        $('#modalReject').modal('hide');
+                        modal.hide();
 
                         loadPage(res.redirect);
                         history.pushState(null, null, res.redirect);
