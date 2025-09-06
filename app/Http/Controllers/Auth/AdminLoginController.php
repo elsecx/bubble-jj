@@ -22,9 +22,9 @@ class AdminLoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        $roles = Role::whereIn('name', ['admin', 'super'])->pluck('id');
-        $admin = User::where('email', $request->email)->whereIn('role_id', $roles);
-
+        $admin = User::where('email', $request->email)->whereHas('role', function ($q) {
+            $q->whereIn('name', ['admin', 'super']);
+        })->first();
 
         if (!$admin) {
             return response()->json([
