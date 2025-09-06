@@ -22,8 +22,9 @@ class AdminLoginController extends Controller
             'password' => 'required|string',
         ]);
 
-        $role = Role::where('name', 'admin')->first();
-        $admin = User::where('email', $request->email)->where('role_id', $role->id)->first();
+        $roles = Role::whereIn('name', ['admin', 'super'])->pluck('id');
+        $admin = User::where('email', $request->email)->whereIn('role_id', $roles);
+
 
         if (!$admin) {
             return response()->json([
