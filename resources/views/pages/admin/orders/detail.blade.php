@@ -57,11 +57,15 @@
                                     @foreach ($order->files as $row => $file)
                                         <tr>
                                             <td>{{ $row }}</td>
-                                            <td>{{ basename($file->filename) }}</td>
+                                            <td>
+                                                <a href="{{ asset('storage/' . $file->filename) }}" class="text-primary" target="_blank">
+                                                    {{ basename($file->filename) }}
+                                                </a>
+                                            </td>
                                             <td>{{ $file->duration ?? 0 }}</td>
                                             <td>{{ $file->size }}</td>
                                             <td>
-                                                <a href="{{ asset('storage/' . $file->filename) }}" target="_blank" class="btn btn-sm btn-success">
+                                                <a href="{{ asset('storage/' . $file->filename) }}" class="btn btn-sm btn-success" download>
                                                     <i class='fe fe-download'></i>
                                                     Download
                                                 </a>
