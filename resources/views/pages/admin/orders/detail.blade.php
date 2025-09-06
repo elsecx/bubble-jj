@@ -13,7 +13,7 @@
                                 <i class='fe fe-x'></i>
                                 Tolak
                             </button>
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#uploadResult">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalResult">
                                 <i class='fe fe-upload'></i>
                                 Upload hasil
                             </button>
@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="uploadResult" tabindex="-1" aria-labelledby="uploadResultLabel" aria-hidden="true">
+    <div class="modal fade" id="modalResult" tabindex="-1" aria-labelledby="modalResultLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form id="form-result" action="{{ route('admin.orders.result', $order->id) }}" method="POST" enctype="multipart/form-data">
@@ -87,7 +87,7 @@
                     @method('POST')
 
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="uploadResultLabel">Upload Hasil</h1>
+                        <h1 class="modal-title fs-5" id="modalResultLabel">Upload Hasil</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -141,8 +141,11 @@
 
             let form = $(this);
             let formData = new FormData(this);
-            let btnSubmit = form.find("button[type=submit]");
 
+            const modalEl = document.getElementById("modalResult");
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+
+            let btnSubmit = form.find("button[type=submit]");
             btnSubmit.prop("disabled", true).text("Loading...");
 
             $.ajax({
@@ -155,7 +158,7 @@
                     if (res.status === 'success') {
                         showToast('success', res.message);
 
-                        $('#uploadResult').modal('hide');
+                        modal.hide();
 
                         loadPage(res.redirect);
                         history.pushState(null, null, res.redirect);
