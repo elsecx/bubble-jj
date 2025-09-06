@@ -108,6 +108,10 @@
                                                     <h6 class="fw-bold text-success mb-2">{{ $order->category->price }}</h6>
 
                                                     <div class="mt-auto d-flex gap-2 flex-wrap">
+                                                        <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary w-100">
+                                                            Detail
+                                                            <i class="fe fe-corner-down-right text-white"></i>
+                                                        </a>
                                                         @if ($order->status === 'pending')
                                                             <button type="button" class="btn btn-sm btn-danger btn-cancel-order w-100"
                                                                 data-url="{{ route('user.order.destroy', $order->id) }}">
@@ -115,10 +119,6 @@
                                                                 <i class="fe fe-x text-white"></i>
                                                             </button>
                                                         @endif
-                                                        <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary w-100">
-                                                            Detail
-                                                            <i class="fe fe-corner-down-right text-white"></i>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
