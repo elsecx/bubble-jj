@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\UploadCategory;
-use App\Services\Order as Order;
+use App\Services\Order as OrderServices;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -23,16 +24,25 @@ class OrderController extends Controller
 
         switch ($category->slug) {
             case 'photo':
-                return Order\UploadPhotosService::handle($request, $category);
+                return OrderServices\UploadPhotosService::handle($request, $category);
                 break;
             case 'video':
-                return Order\UploadVideoService::handle($request, $category);
+                return OrderServices\UploadVideoService::handle($request, $category);
                 break;
             case 'free':
-                return Order\UploadFreeService::handle($request, $category);
+                return OrderServices\UploadFreeService::handle($request, $category);
                 break;
             default:
                 abort(404);
         }
+    }
+
+    public function show(Request $request, Order $order)
+    {
+        $order->load('user.profile', 'category');
+
+        return spaRender($request, 'pages.user.order.detail', [
+            'order' => $order
+        ]);
     }
 }

@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column gap-2">
-                                            <a href="" class="btn btn-sm btn-primary">
+                                            <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary spa-link">
                                                 Detail
                                                 <i class="fe fe-corner-down-right text-white"></i>
                                             </a>
