@@ -88,47 +88,44 @@
                 <div class="card-body p-0">
                     <div class="tab-content">
                         <div class="tab-pane show active border-0 p-0" id="history" role="tabpanel">
-                            <ol class="list-group list-group-numbered">
-                                @forelse ($orders as $order)
-                                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                                        <div class="ms-2 me-auto">
-                                            <span class="font-monospace text-secondary">
-                                                {{ formatDate($order->created_at) }}
-                                            </span>
-                                            <div class="d-flex gap-2">
-                                                <h5 class="fw-bold">
-                                                    {{ $order->category->title }}
-                                                </h5>
-                                                <span class="badge text-bg-{{ $order->status_color }}" style="height: fit-content;">
-                                                    {{ $order->status_label }}
-                                                </span>
+                            @if ($orders->isEmpty())
+                                <p class="text-center text-muted mt-3">Belum ada riwayat order.</p>
+                            @else
+                                <div class="row g-3">
+                                    @foreach ($orders as $order)
+                                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                            <div class="card h-100">
+                                                <div class="card-body d-flex flex-column">
+                                                    <span class="font-monospace text-secondary mb-1">
+                                                        {{ formatDate($order->created_at) }}
+                                                    </span>
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <h5 class="fw-bold mb-2">{{ $order->category->title }}</h5>
+                                                        <span class="badge text-bg-{{ $order->status_color }} mb-2">
+                                                            {{ $order->status_label }}
+                                                        </span>
+                                                    </div>
+                                                    <h6 class="fw-bold text-success mb-2">{{ $order->category->price }}</h6>
+
+                                                    <div class="mt-auto d-flex gap-2 flex-wrap">
+                                                        @if ($order->status === 'pending')
+                                                            <button type="button" class="btn btn-sm btn-danger btn-cancel-order w-100"
+                                                                data-url="{{ route('user.order.destroy', $order->id) }}">
+                                                                Batalkan
+                                                                <i class="fe fe-x text-white"></i>
+                                                            </button>
+                                                        @endif
+                                                        <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary w-100">
+                                                            Detail
+                                                            <i class="fe fe-corner-down-right text-white"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-column align-items-end gap-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                @if ($order->status === 'pending')
-                                                    <button type="button" class="btn btn-sm btn-danger btn-cancel-order spa-link"
-                                                        data-url="{{ route('user.order.destroy', $order->id) }}">
-                                                        Batalkan
-                                                        <i class="fe fe-x text-white"></i>
-                                                    </button>
-                                                @endif
-                                                <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary spa-link">
-                                                    Detail
-                                                    <i class="fe fe-corner-down-right text-white"></i>
-                                                </a>
-                                            </div>
-                                            <h6 class="fw-bold text-success">
-                                                {{ $order->category->price }}
-                                            </h6>
-                                        </div>
-                                    </li>
-                                @empty
-                                    <li class="list-group-item text-center text-muted">
-                                        Belum ada riwayat order.
-                                    </li>
-                                @endforelse
-                            </ol>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                         <div class="tab-pane" id="data-jj" role="tabpanel">
                             <div class="accordion" id="displayType">
