@@ -1,3 +1,16 @@
+// Setup global AJAX
+$.ajaxSetup({
+    headers: {
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+    },
+    error: function (xhr) {
+        if (xhr.status === 401 || xhr.status === 419) {
+            window.location.href = "/login";
+        }
+    },
+});
+
 // Remove partial tags
 function removePartialTags() {
     $('style[data-partial="1"], script[data-partial="1"]').remove();
