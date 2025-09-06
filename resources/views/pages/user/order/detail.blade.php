@@ -77,10 +77,10 @@
                                                 Durasi: {{ $file->duration ?? 0 }} detik <br>
                                                 Ukuran: {{ formatSize($file->size) }}
                                             </p>
-                                            <a href="{{ asset('storage/' . $file->filename) }}" class="btn btn-sm btn-primary mt-auto glightbox"
-                                                data-gallery="files">
-                                                <i class='fe fe-eye'></i> Lihat
-                                            </a>
+                                            <button type="button" class="btn btn-sm btn-danger mt-auto btn-delete-file"
+                                                data-url="{{ route('user.order.file.remove', $file->id) }}">
+                                                <i class='fe fe-trash'></i> Hapus
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,9 +89,48 @@
                             @endforelse
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script data-partial="1">
+        $(".btn-delete-file").on("click", function(e) {
+            e.preventDefault();
+            const url = $(this).data('url');
+
+            Swal.fire({
+                title: "Apakah Anda yakin ingin menghapus file ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                cancelButtonColor: "#adb5bd",
+                confirmButtonText: "Ya, Hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function(res) {
+                            if (res.status === 'success') {
+                                showToast('success', res.message, 2500);
+                                location.reload();
+                            } else {
+                                showToast('error', res.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                        }
+                    });
+                }
+            });
+        })
+    </script>
 @endsection

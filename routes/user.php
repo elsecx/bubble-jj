@@ -18,6 +18,7 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
         Route::prefix('order')->name('order.')->group(function () {
             Route::get('/{order}', 'show')->whereNumber('order')->name('show');
             Route::delete('{order}', 'destroy')->whereNumber('order')->name('destroy');
+            Route::delete('/files/{file}', 'destroyFile')->name('file.remove');
         });
     });
 

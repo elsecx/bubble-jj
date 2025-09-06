@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\File;
 use App\Models\Order;
 use App\Models\UploadCategory;
 use App\Services\Order as OrderServices;
@@ -58,6 +59,33 @@ class OrderController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Pesanan berhasil dihapus.'
+        ]);
+    }
+
+    public function destroyFile(Request $request, File $file)
+    {
+        $order = $file->order;
+
+        if ($order->user_id !== $request->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        if ($order->files()->count() <= 1) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Tidak bisa menghapus file terakhir. Harus ada minimal satu file per pesanan.'
+            ], 422);
+        }
+
+        if (Storage::exists($file->filename)) {
+            Storage::delete($file->filename);
+        }
+
+        $file->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'File berhasil dihapus.'
         ]);
     }
 }
