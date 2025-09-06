@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\UploadCategory;
 use App\Services\Order as OrderServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -43,6 +44,20 @@ class OrderController extends Controller
 
         return spaRender($request, 'pages.user.order.detail', [
             'order' => $order
+        ]);
+    }
+
+    public function destroy(Request $request, Order $order)
+    {
+        if ($order->user_id !== $request->user()->id) {
+            abort(403, 'Unauthorized');
+        }
+
+        $order->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Pesanan berhasil dihapus.'
         ]);
     }
 }
