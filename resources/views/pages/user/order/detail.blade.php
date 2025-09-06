@@ -14,12 +14,12 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center justify-content-between">
-                        <h5 class="fw-bold fs-5">Pesanan <mark>{{ $order->user->name }}</mark></h5>
+                        <h6 class="fw-bold fs-6">Pesanan: <mark>{{ $order->user->name }}</mark></h6>
                         @if ($order->status === 'pending')
                             <div class="d-flex align-items-center gap-3">
-                                <button type="button" class="btn btn-danger">
+                                <button type="button" class="btn btn-sm btn-danger">
                                     <i class='fe fe-x'></i>
-                                    Batal
+                                    Batalkan
                                 </button>
                             </div>
                         @endif
@@ -45,36 +45,46 @@
                     </div>
                     <div class="mb-3">
                         <span class="fw-bold">Files: </span>
-                        <div class="table-responsive">
-                            <table id="table-order" class="table mb-0 table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Filename</th>
-                                        <th>Durasi</th>
-                                        <th>Ukuran</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($order->files as $row => $file)
-                                        <tr>
-                                            <td>{{ $row }}</td>
-                                            <td>{{ basename($file->filename) }}</td>
-                                            <td>{{ $file->duration ?? 0 }}</td>
-                                            <td>{{ $file->size }}</td>
-                                            <td>
-                                                <a href="{{ asset('storage/' . $file->filename) }}" target="_blank" class="btn btn-sm btn-success">
-                                                    <i class='fe fe-download'></i>
-                                                    Download
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="row g-3">
+                            @forelse ($order->files as $file)
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                    <div class="card h-100">
+                                        @php
+                                            $ext = pathinfo($file->filename, PATHINFO_EXTENSION);
+                                        @endphp
+
+                                        @if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
+                                            <img src="{{ asset('storage/' . $file->filename) }}" class="card-img-top"
+                                                alt="{{ basename($file->filename) }}">
+                                        @elseif(in_array($ext, ['mp4', 'webm', 'ogg']))
+                                            <video class="card-img-top" controls>
+                                                <source src="{{ asset('storage/' . $file->filename) }}" type="video/{{ $ext }}">
+                                            </video>
+                                        @else
+                                            <div class="d-flex align-items-center justify-content-center bg-light" style="height: 150px;">
+                                                <i class="fe fe-file fs-1 text-secondary"></i>
+                                            </div>
+                                        @endif
+
+                                        <div class="card-body d-flex flex-column">
+                                            <h6 class="card-title text-truncate" title="{{ basename($file->filename) }}">{{ basename($file->filename) }}
+                                            </h6>
+                                            <p class="card-text mb-1">
+                                                Durasi: {{ $file->duration ?? 0 }} detik <br>
+                                                Ukuran: {{ formatSize($file->size) }}
+                                            </p>
+                                            <a href="{{ asset('storage/' . $file->filename) }}" target="_blank" class="btn btn-sm btn-success mt-auto">
+                                                <i class='fe fe-download'></i> Download
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-muted">Belum ada file untuk pesanan ini.</p>
+                            @endforelse
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
