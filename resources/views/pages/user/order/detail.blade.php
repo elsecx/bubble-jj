@@ -17,7 +17,8 @@
                         <h6 class="fw-bold fs-6">Pesanan: <mark>{{ $order->user->name }}</mark></h6>
                         @if ($order->status === 'pending')
                             <div class="d-flex align-items-center gap-3">
-                                <button type="button" class="btn btn-sm btn-danger">
+                                <button type="button" class="btn btn-sm btn-danger btn-cancel-order"
+                                    data-url="{{ route('user.order.destroy', $order->id) }}">
                                     <i class='fe fe-x'></i>
                                     Batalkan
                                 </button>
@@ -97,6 +98,49 @@
 
 @section('scripts')
     <script data-partial="1">
+        $(".btn-cancel-order").on("click", function(e) {
+            e.preventDefault();
+            const url = $(this).data('url');
+
+            Swal.fire({
+                title: "Apakah Anda yakin ingin membatalkan pesanan ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                cancelButtonColor: "#adb5bd",
+                confirmButtonText: "Ya, Batalkan",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function(res) {
+                            if (res.status === 'success') {
+                                showToast('success', res.message, 2500);
+
+                                loadPage(res.redirect);
+                                history.pushState(null, null, res.redirect);
+                            } else {
+                                showToast("success", res.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            if (xhr.status === 422 && xhr.responseJSON.errors) {
+                                const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                                showToast('error', errors || "Data yang dimasukkan tidak valid");
+                            } else {
+                                showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                            }
+                        },
+                    })
+                }
+            });
+        });
+
         $(".btn-delete-file").on("click", function(e) {
             e.preventDefault();
             const url = $(this).data('url');

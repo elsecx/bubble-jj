@@ -62,7 +62,8 @@ class OrderController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Pesanan berhasil dihapus.'
+            'message' => 'Pesanan berhasil dihapus.',
+            'redirect' => route('user.dashboard'),
         ]);
     }
 
