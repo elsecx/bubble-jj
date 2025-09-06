@@ -54,6 +54,10 @@ class OrderController extends Controller
             abort(403, 'Unauthorized');
         }
 
+        $order->files()->each(function ($file) {
+            $file->delete();
+        });
+
         $order->delete();
 
         return response()->json([
