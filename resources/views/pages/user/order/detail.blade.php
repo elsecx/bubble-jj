@@ -54,12 +54,16 @@
                                         @endphp
 
                                         @if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp']))
-                                            <img src="{{ asset('storage/' . $file->filename) }}" class="card-img-top"
-                                                alt="{{ basename($file->filename) }}">
+                                            <a href="{{ asset('storage/' . $file->filename) }}" class="glightbox" data-gallery="files">
+                                                <img src="{{ asset('storage/' . $file->filename) }}" class="card-img-top"
+                                                    alt="{{ basename($file->filename) }}">
+                                            </a>
                                         @elseif(in_array($ext, ['mp4', 'webm', 'ogg']))
-                                            <video class="card-img-top" controls>
-                                                <source src="{{ asset('storage/' . $file->filename) }}" type="video/{{ $ext }}">
-                                            </video>
+                                            <a href="{{ asset('storage/' . $file->filename) }}" class="glightbox" data-gallery="files">
+                                                <video class="card-img-top" controls>
+                                                    <source src="{{ asset('storage/' . $file->filename) }}" type="video/{{ $ext }}">
+                                                </video>
+                                            </a>
                                         @else
                                             <div class="d-flex align-items-center justify-content-center bg-light" style="height: 150px;">
                                                 <i class="fe fe-file fs-1 text-secondary"></i>
@@ -73,8 +77,9 @@
                                                 Durasi: {{ $file->duration ?? 0 }} detik <br>
                                                 Ukuran: {{ formatSize($file->size) }}
                                             </p>
-                                            <a href="{{ asset('storage/' . $file->filename) }}" target="_blank" class="btn btn-sm btn-success mt-auto">
-                                                <i class='fe fe-download'></i> Download
+                                            <a href="{{ asset('storage/' . $file->filename) }}" class="btn btn-sm btn-primary mt-auto glightbox"
+                                                data-gallery="files">
+                                                <i class='fe fe-eye'></i> Lihat
                                             </a>
                                         </div>
                                     </div>
