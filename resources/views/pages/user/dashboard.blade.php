@@ -107,11 +107,11 @@
                                         <div class="d-flex flex-column align-items-end gap-2">
                                             <div class="d-flex align-items-center gap-2">
                                                 @if ($order->status === 'pending')
-                                                    <a href="{{ route('user.order.destroy', $order->id) }}"
-                                                        class="btn btn-sm btn-danger btn-cancel-order spa-link">
+                                                    <button type="button" class="btn btn-sm btn-danger btn-cancel-order spa-link"
+                                                        data-url="{{ route('user.order.destroy', $order->id) }}">
                                                         Batalkan
                                                         <i class="fe fe-x text-white"></i>
-                                                    </a>
+                                                    </button>
                                                 @endif
                                                 <a href="{{ route('user.order.show', $order->id) }}" class="btn btn-sm btn-primary spa-link">
                                                     Detail
@@ -252,7 +252,7 @@
 
         $(".btn-cancel-order").on("click", function(e) {
             e.preventDefault();
-            const url = $(this).attr('href');
+            const url = $(this).data('url');
 
             Swal.fire({
                 title: "Apakah Anda yakin ingin membatalkan pesanan ini?",
