@@ -18,16 +18,16 @@
     <link rel="icon" href="{{ asset(SettingsHelper::get('favicon')) }}" type="image/x-icon">
 
     <!-- Choices JS -->
-    <script src="{{ asset('vendor/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
     <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('vendor/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link id="style" href="{{ asset('templates/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Style Css -->
-    <link href="{{ asset('vendor/css/styles.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/styles.min.css') }}" rel="stylesheet">
 
     <!-- Icons Css -->
-    <link href="{{ asset('vendor/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/icons.css') }}" rel="stylesheet">
 
     <style>
         .footer {
@@ -70,22 +70,22 @@
         </script>
 
         <!-- Main Theme Js -->
-        <script src="{{ asset('vendor/js/main.js') }}"></script>
+        <script src="{{ asset('templates/js/main.js') }}"></script>
 
         <!-- Main Theme JS -->
-        <script src="{{ asset('vendor/js/authentication-main.js') }}"></script>
+        <script src="{{ asset('templates/js/authentication-main.js') }}"></script>
 
         <!-- JQuery JS -->
-        <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('templates/js/jquery.min.js') }}"></script>
 
         {{-- Bootstrap JS --}}
-        <script src="{{ asset('vendor/js/landing/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('templates/js/landing/bootstrap.min.js') }}"></script>
 
         <!-- Date & Time Picker JS -->
-        <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
+        <script src="{{ asset('templates/libs/moment/moment.js') }}"></script>
 
         <!-- Sweetalert2 JS -->
-        <script src="{{ asset('vendor/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('templates/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
         <!-- SPA JS -->
         <script src="{{ asset('assets/js/script.js') }}"></script>

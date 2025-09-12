@@ -19,25 +19,25 @@
     <link rel="icon" href="{{ asset(SettingsHelper::get('favicon')) }}" type="image/x-icon">
 
     <!-- Choices JS -->
-    <script src="{{ asset('vendor/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
     <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('vendor/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link id="style" href="{{ asset('templates/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Style Css -->
-    <link href="{{ asset('vendor/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/styles.css') }}" rel="stylesheet">
 
     <!-- Icons Css -->
-    <link href="{{ asset('vendor/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/icons.css') }}" rel="stylesheet">
 
     <!-- Node Waves Css -->
-    <link href="{{ asset('vendor/libs/node-waves/waves.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/libs/node-waves/waves.min.css') }}" rel="stylesheet">
 
     <!-- Simplebar Css -->
-    <link href="{{ asset('vendor/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/libs/simplebar/simplebar.min.css') }}" rel="stylesheet">
 
     <!-- Sweetalert2 JS -->
-    <link rel="stylesheet" href="{{ asset('vendor/libs/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/libs/sweetalert2/sweetalert2.min.css') }}">
 
     @yield('styles')
 
@@ -47,7 +47,7 @@
 
     <!-- Loader -->
     <div id="loader">
-        <img src="{{ asset('vendor/images/media/media-75.svg') }}" alt="">
+        <img src="{{ asset('templates/images/media/media-75.svg') }}" alt="">
     </div>
     <!-- Loader -->
 
@@ -108,34 +108,34 @@
     </script>
 
     <!-- Main Theme Js -->
-    <script src="{{ asset('vendor/js/main.js') }}"></script>
+    <script src="{{ asset('templates/js/main.js') }}"></script>
 
     <!-- JQuery JS -->
-    <script src="{{ asset('vendor/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/jquery/dist/jquery.min.js') }}"></script>
 
     <!-- Date & Time Picker JS -->
-    <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
+    <script src="{{ asset('templates/libs/moment/moment.js') }}"></script>
 
     <!-- Popper JS -->
-    <script src="{{ asset('vendor/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/@popperjs/core/umd/popper.min.js') }}"></script>
 
     <!-- Bootstrap JS -->
-    <script src="{{ asset('vendor/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Defaultmenu JS -->
-    <script src="{{ asset('vendor/js/defaultmenu.min.js') }}"></script>
+    <script src="{{ asset('templates/js/defaultmenu.min.js') }}"></script>
 
     <!-- Node Waves JS-->
-    <script src="{{ asset('vendor/libs/node-waves/waves.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/node-waves/waves.min.js') }}"></script>
 
     <!-- Sticky JS -->
-    <script src="{{ asset('vendor/js/sticky.js') }}"></script>
+    <script src="{{ asset('templates/js/sticky.js') }}"></script>
 
     <!-- Simplebar JS -->
-    <script src="{{ asset('vendor/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/simplebar/simplebar.min.js') }}"></script>
 
     <!-- Sweetalert2 JS -->
-    <script src="{{ asset('vendor/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     <!-- SPA JS -->
     <script src="{{ asset('assets/js/script.js') }}"></script>

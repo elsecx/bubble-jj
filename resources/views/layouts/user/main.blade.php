@@ -19,17 +19,17 @@
     <link rel="icon" href="{{ asset(SettingsHelper::get('favicon')) }}" type="image/x-icon">
 
     <!-- Bootstrap Css -->
-    <link id="style" href="{{ asset('vendor/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link id="style" href="{{ asset('templates/libs/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Style Css -->
-    <link href="{{ asset('vendor/css/styles.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/styles.min.css') }}" rel="stylesheet">
 
     <!-- Icons Css -->
-    <link href="{{ asset('vendor/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/css/icons.css') }}" rel="stylesheet">
 
     <!-- Choices Css -->
-    <link rel="stylesheet" href="{{ asset('vendor/libs/choices.js/public/assets/styles/choices.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/libs/glightbox/css/glightbox.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/libs/choices.js/public/assets/styles/choices.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/libs/glightbox/css/glightbox.min.css') }}">
 
     <style>
         .footer {
@@ -49,7 +49,7 @@
 <body>
     <!-- Loader -->
     <div id="loader">
-        <img src="{{ asset('vendor/images/media/media-75.svg') }}" alt="">
+        <img src="{{ asset('templates/images/media/media-75.svg') }}" alt="">
     </div>
     <!-- Loader -->
 
@@ -124,26 +124,26 @@
     </script>
 
     <!-- Main Theme Js -->
-    <script src="{{ asset('vendor/js/main.js') }}"></script>
+    <script src="{{ asset('templates/js/main.js') }}"></script>
 
     <!-- JQuery JS -->
-    <script src="{{ asset('vendor/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/jquery/dist/jquery.min.js') }}"></script>
 
     <!-- Date & Time Picker JS -->
-    <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
+    <script src="{{ asset('templates/libs/moment/moment.js') }}"></script>
 
     {{-- Bootstrap JS --}}
-    <script src="{{ asset('vendor/js/landing/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('templates/js/landing/bootstrap.min.js') }}"></script>
 
     <!-- Choices JS -->
-    <script src="{{ asset('vendor/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
     <!-- Gallery JS -->
-    <script src="{{ asset('vendor/libs/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('vendor/js/gallery.js') }}"></script>
+    <script src="{{ asset('templates/libs/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('templates/js/gallery.js') }}"></script>
 
     <!-- Sweetalert2 JS -->
-    <script src="{{ asset('vendor/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('templates/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     <!-- SPA JS -->
     <script src="{{ asset('assets/js/script.js') }}"></script>
