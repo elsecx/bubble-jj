@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" id="main-font-link">
 
     <!-- [Template CSS Files] -->
-    <link rel="stylesheet" href="{{ asset('vendor/css/landing/style.css') }}" id="main-style-link">
-    <link rel="stylesheet" href="{{ asset('vendor/css/landing/style-preset.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/landing/style.css') }}" id="main-style-link">
+    <link rel="stylesheet" href="{{ asset('templates/css/landing/style-preset.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('vendor/css/landing/landing.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/landing/landing.css') }}">
 
     <style>
         .footer {
@@ -45,7 +45,7 @@
         <nav class="navbar navbar-dark default">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('vendor/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
+                    <img src="{{ asset('templates/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
                 </a>
                 <div>
                     <div class="d-flex align-items-center gap-3">
@@ -138,13 +138,13 @@
     </footer>
 
     <!-- JQuery JS -->
-    <script src="{{ asset('vendor/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('templates/js/jquery.min.js') }}"></script>
 
     {{-- Bootstrap --}}
-    <script src="{{ asset('vendor/js/landing/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('templates/js/landing/bootstrap.min.js') }}"></script>
 
     <!-- Date & Time Picker JS -->
-    <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
+    <script src="{{ asset('templates/libs/moment/moment.js') }}"></script>
 
     <script>
         let date = moment(new Date());
