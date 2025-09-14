@@ -82,7 +82,7 @@
                 <div class="card-body">
                     <ul class="nav nav-pills justify-content-start nav-style-3 mb-3" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#15" aria-selected="true">
+                            <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#10" aria-selected="true">
                                 10 Detik
                             </a>
                         </li>
@@ -103,8 +103,8 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="15" role="tabpanel">
-                            @forelse ($videos[15] ?? [] as $video)
+                        <div class="tab-pane show active" id="10" role="tabpanel">
+                            @forelse ($videos[10] ?? [] as $video)
                                 <div class="card">
                                     <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>
                                     <div class="card-body">
