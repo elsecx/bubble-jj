@@ -117,7 +117,7 @@
                     [5, 15, 30, 50, 75, 100]
                 ],
                 language: {
-                    url: "{{ asset('vendor/js/i18n/id.json') }}"
+                    url: "{{ asset('templates/js/i18n/id.json') }}"
                 }
             });
         }
