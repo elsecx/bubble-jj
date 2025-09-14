@@ -10,7 +10,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
                     <h5 class="fw-bold">Edit Akun</h5>
@@ -74,7 +74,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header pb-0 mb-0">
                     <h5 class="fw-bold">Video JJ Kamu</h5>
@@ -82,7 +82,12 @@
                 <div class="card-body">
                     <ul class="nav nav-pills justify-content-start nav-style-3 mb-3" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#20" aria-selected="true">
+                            <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#15" aria-selected="true">
+                                10 Detik
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page" href="#20" aria-selected="true">
                                 15 Detik
                             </a>
                         </li>
@@ -98,7 +103,26 @@
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane show active" id="20" role="tabpanel">
+                        <div class="tab-pane show active" id="15" role="tabpanel">
+                            @forelse ($videos[15] ?? [] as $video)
+                                <div class="card">
+                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>
+                                    <div class="card-body">
+                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                            {{ formatSize($video->size) }}
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                {{ formatDate($video->updated_at) }}
+                                            </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            @empty
+                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                            @endforelse
+                        </div>
+                        <div class="tab-pane show" id="20" role="tabpanel">
                             @forelse ($videos[20] ?? [] as $video)
                                 <div class="card">
                                     <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top" controls></video>

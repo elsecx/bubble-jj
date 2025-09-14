@@ -137,8 +137,38 @@
                             <div class="accordion" id="displayType">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#display-20"
-                                            aria-expanded="false" aria-controls="display-20">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#display-10"
+                                            aria-expanded="false" aria-controls="display-10">
+                                            10 detik
+                                        </button>
+                                    </h2>
+                                    <div id="display-10" class="accordion-collapse collapse" data-bs-parent="#displayType">
+                                        <div class="accordion-body">
+                                            @forelse ($videos[10] ?? [] as $video)
+                                                <div class="card">
+                                                    <video src="{{ asset('storage/videojj/' . $video->filename) }}" class="card-img-top"
+                                                        controls></video>
+                                                    <div class="card-body">
+                                                        <p class="card-text">Durasi: {{ $video->duration }} detik | Size:
+                                                            {{ formatSize($video->size) }}
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-body-secondary">
+                                                                {{ formatDate($video->updated_at) }}
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p class="text-muted">Belum ada video untuk jenis ini.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#display-20" aria-expanded="false" aria-controls="display-20">
                                             15 detik
                                         </button>
                                     </h2>
