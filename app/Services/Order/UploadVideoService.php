@@ -40,7 +40,7 @@ class UploadVideoService
                 $order = Order::create([
                     'user_id' => Auth::user()->id,
                     'category_id' => $category->id,
-                    'display_type' => $request->display_type ?? 20,
+                    'display_type' => $request->display_type ?? 10,
                     'notes' => $request->notes,
                 ]);
 

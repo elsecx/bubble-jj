@@ -51,7 +51,7 @@ class UploadFreeService
                         'user_id' => $user->id,
                         'username_1' => $user->profile->username_1,
                         'username_2' => $user->profile->username_2,
-                        'display_type' => $request->display_type ?? 20,
+                        'display_type' => $request->display_type ?? 10,
                         'filename' => $filename,
                         'duration' => round($duration),
                         'size' => $file->getSize(),
