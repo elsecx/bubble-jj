@@ -53,7 +53,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/libs/datatables/datatables.min.js') }}" data-partial="1"></script>
+    <script src="{{ asset('templates/libs/datatables/datatables.min.js') }}" data-partial="1"></script>
     <script data-partial="1">
         window.operatorsTable = window.operatorsTable || null;
 
