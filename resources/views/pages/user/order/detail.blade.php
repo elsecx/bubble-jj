@@ -39,9 +39,11 @@
 
                 <div class="card-body">
                     <div class="mb-3">
-                        <span class="fw-bold">Catatan: </span>
+                        <span class="fw-bold">
+                            {{ $order->status === 'rejected' ? 'Alasan Penolakan:' : 'Catatan:' }}
+                        </span>
                         <p>
-                            {{ $order->notes }}
+                            {{ $order->status === 'rejected' ? $order->reject_reason : $order->notes }}
                         </p>
                     </div>
                     <div class="mb-3">
