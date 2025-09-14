@@ -125,13 +125,6 @@
                                                             Detail
                                                             <i class="fe fe-corner-down-right text-white"></i>
                                                         </a>
-                                                        @if ($order->status === 'pending')
-                                                            <button type="button" class="btn btn-sm btn-danger btn-cancel-order w-100"
-                                                                data-url="{{ route('user.order.destroy', $order->id) }}">
-                                                                Batalkan
-                                                                <i class="fe fe-x text-white"></i>
-                                                            </button>
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -303,47 +296,6 @@
                         loadPage(redirect);
                         history.pushState(null, null, redirect);
                     });
-                }
-            });
-        });
-
-        $(".btn-cancel-order").on("click", function(e) {
-            e.preventDefault();
-            const url = $(this).data('url');
-
-            Swal.fire({
-                title: "Apakah Anda yakin ingin membatalkan pesanan ini?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#dc3545",
-                cancelButtonColor: "#adb5bd",
-                confirmButtonText: "Ya, Batalkan",
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        type: "DELETE",
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr("content"),
-                        },
-                        success: function(res) {
-                            if (res.status === 'success') {
-                                showToast('success', res.message, 2500);
-                                location.reload();
-                            } else {
-                                showToast("success", res.message);
-                            }
-                        },
-                        error: function(xhr) {
-                            if (xhr.status === 422 && xhr.responseJSON.errors) {
-                                const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
-                                showToast('error', errors || "Data yang dimasukkan tidak valid");
-                            } else {
-                                showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
-                            }
-                        },
-                    })
                 }
             });
         });
