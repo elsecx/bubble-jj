@@ -38,7 +38,9 @@ class UploadFreeService
 
                 $user = Auth::user();
 
-                $existing = DataJJ::where('user_id', $user->id)->where('display_type', $request->display_type)->first();
+                $displayType = $request->input('display_type', 10);
+
+                $existing = DataJJ::where('user_id', $user->id)->where('display_type', $displayType)->first();
                 if ($existing) {
                     Storage::disk('public')->delete('videojj/' . $existing->filename);
                     $existing->update([
@@ -52,7 +54,7 @@ class UploadFreeService
                         'user_id' => $user->id,
                         'username_1' => $user->profile->username_1,
                         'username_2' => $user->profile->username_2,
-                        'display_type' => $request->display_type ?? 10,
+                        'display_type' => $displayType,
                         'filename' => $filename,
                         'duration' => round($duration),
                         'size' => $file->getSize(),

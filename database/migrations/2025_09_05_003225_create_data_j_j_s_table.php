@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('username_1');
             $table->string('username_2')->nullable();
-            $table->integer('display_type')->default(20);
+            $table->integer('display_type')->default(10);
             $table->string('filename');
             $table->integer('duration');
             $table->integer('size');
