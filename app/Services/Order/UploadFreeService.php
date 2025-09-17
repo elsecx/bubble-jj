@@ -7,6 +7,7 @@ use getID3;
 use App\Models\UploadCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class UploadFreeService
@@ -39,7 +40,7 @@ class UploadFreeService
 
                 $existing = DataJJ::where('user_id', $user->id)->where('display_type', $request->display_type)->first();
                 if ($existing) {
-                    // concise: description for not existing video in data_jj
+                    Storage::disk('public')->delete('videojj/' . $existing->filename);
                     $existing->update([
                         'filename' => $filename,
                         'duration' => round($duration),
