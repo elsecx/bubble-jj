@@ -94,6 +94,12 @@ class OrdersController extends Controller
 
                 DB::beginTransaction();
 
+                $existing = DataJJ::where('user_id', $order->user_id)->where('username_1', $order->user->profile->username_1)->first();
+
+                if ($existing) {
+                    Storage::disk('public')->delete('videojj/' . $existing->filename);
+                }
+
                 $path = $videoFile->store('videojj', 'public');
                 $filename = basename($path);
 
