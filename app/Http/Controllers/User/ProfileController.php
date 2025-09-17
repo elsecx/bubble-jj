@@ -171,4 +171,17 @@ class ProfileController extends Controller
         @unlink($tmpFile);
         return $result;
     }
+
+    public function destroyVideoJJ($type)
+    {
+        $video = DataJJ::where('user_id', Auth::id())->where('display_type', $type)->where('sts_active', true)->firstOrFail();
+
+        Storage::disk('public')->delete('videojj/' . $video->filename);
+        $video->delete();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Video berhasil dihapus.'
+        ]);
+    }
 }

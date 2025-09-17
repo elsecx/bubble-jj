@@ -27,5 +27,7 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
         Route::put('/update', [ProfileController::class, 'update'])->name('update');
 
         Route::post('/picture/{slot}', [ProfileController::class, 'updatePicture'])->name('update.picture');
+
+        Route::delete('/jj/{type}', [ProfileController::class, 'destroyVideoJJ'])->name('jj.destroy');
     });
 });

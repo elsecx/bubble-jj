@@ -136,12 +136,18 @@
                         <div class="tab-pane" id="data-jj" role="tabpanel">
                             <div class="accordion" id="displayType">
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#display-10"
-                                            aria-expanded="false" aria-controls="display-10">
-                                            10 detik
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <h2 class="accordion-header flex-1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#display-10" aria-expanded="false" aria-controls="display-10">
+                                                10 detik
+                                            </button>
+                                        </h2>
+                                        <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
+                                            data-url="{{ route('user.profile.jj.destroy', 10) }}" {{ empty($videos[10] ?? []) ? 'disabled' : '' }}>
+                                            Hapus
                                         </button>
-                                    </h2>
+                                    </div>
                                     <div id="display-10" class="accordion-collapse collapse" data-bs-parent="#displayType">
                                         <div class="accordion-body">
                                             @forelse ($videos[10] ?? [] as $video)
@@ -166,12 +172,18 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#display-20" aria-expanded="false" aria-controls="display-20">
-                                            15 detik
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <h2 class="accordion-header flex-1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#display-20" aria-expanded="false" aria-controls="display-20">
+                                                15 detik
+                                            </button>
+                                        </h2>
+                                        <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
+                                            data-url="{{ route('user.profile.jj.destroy', 20) }}" {{ empty($videos[20] ?? []) ? 'disabled' : '' }}>
+                                            Hapus
                                         </button>
-                                    </h2>
+                                    </div>
                                     <div id="display-20" class="accordion-collapse collapse" data-bs-parent="#displayType">
                                         <div class="accordion-body">
                                             @forelse ($videos[20] ?? [] as $video)
@@ -196,12 +208,18 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#display-30" aria-expanded="false" aria-controls="display-30">
-                                            25 detik
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <h2 class="accordion-header flex-1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#display-30" aria-expanded="false" aria-controls="display-30">
+                                                25 detik
+                                            </button>
+                                        </h2>
+                                        <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
+                                            data-url="{{ route('user.profile.jj.destroy', 30) }}" {{ empty($videos[30] ?? []) ? 'disabled' : '' }}>
+                                            Hapus
                                         </button>
-                                    </h2>
+                                    </div>
                                     <div id="display-30" class="accordion-collapse collapse" data-bs-parent="#displayType">
                                         <div class="accordion-body">
                                             @forelse ($videos[30] ?? [] as $video)
@@ -226,12 +244,18 @@
                                     </div>
                                 </div>
                                 <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                            data-bs-target="#display-99" aria-expanded="false" aria-controls="display-99">
-                                            60 detik
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <h2 class="accordion-header flex-1">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#display-99" aria-expanded="false" aria-controls="display-99">
+                                                60 detik
+                                            </button>
+                                        </h2>
+                                        <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
+                                            data-url="{{ route('user.profile.jj.destroy', 99) }}" {{ empty($videos[99] ?? []) ? 'disabled' : '' }}>
+                                            Hapus
                                         </button>
-                                    </h2>
+                                    </div>
                                     <div id="display-99" class="accordion-collapse collapse" data-bs-parent="#displayType">
                                         <div class="accordion-body">
                                             @forelse ($videos[99] ?? [] as $video)
@@ -325,6 +349,44 @@
                     confirmPassword(function() {
                         loadPage(redirect);
                         history.pushState(null, null, redirect);
+                    });
+                }
+            });
+        });
+    </script>
+
+    <script data-partial="1">
+        $(".btn-delete-jj").on("click", function(e) {
+            e.preventDefault();
+            const url = $(this).data('url');
+
+            Swal.fire({
+                title: "Apakah Anda yakin ingin menghapus video JJ ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#dc3545",
+                cancelButtonColor: "#adb5bd",
+                confirmButtonText: "Ya, Hapus",
+                cancelButtonText: "Batal",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: "DELETE",
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr("content"),
+                        },
+                        success: function(res) {
+                            if (res.status === 'success') {
+                                showToast('success', res.message, 2500);
+                                location.reload();
+                            } else {
+                                showToast('error', res.message);
+                            }
+                        },
+                        error: function(xhr) {
+                            showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                        }
                     });
                 }
             });
