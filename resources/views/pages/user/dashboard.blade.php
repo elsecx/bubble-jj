@@ -360,6 +360,27 @@
             e.preventDefault();
             const url = $(this).data('url');
 
+            function deleteJJ() {
+                $.ajax({
+                    url: url,
+                    type: "DELETE",
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    success: function(res) {
+                        if (res.status === 'success') {
+                            showToast('success', res.message, 2500);
+                            location.reload();
+                        } else {
+                            showToast('error', res.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+                });
+            }
+
             Swal.fire({
                 title: "Apakah Anda yakin ingin menghapus video JJ ini?",
                 icon: "warning",
@@ -370,22 +391,13 @@
                 cancelButtonText: "Batal",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        url: url,
-                        type: "DELETE",
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr("content"),
-                        },
-                        success: function(res) {
-                            if (res.status === 'success') {
-                                showToast('success', res.message, 2500);
-                                location.reload();
-                            } else {
-                                showToast('error', res.message);
-                            }
-                        },
-                        error: function(xhr) {
-                            showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    $.get("{{ route('password.status') }}", function(res) {
+                        if (res.confirmed) {
+                            deleteJJ();
+                        } else {
+                            confirmPassword(function() {
+                                deleteJJ();
+                            })
                         }
                     });
                 }
