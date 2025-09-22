@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $categories = UploadCategory::rememberCache('categories_all', 3600, function () {
-            return UploadCategory::all();
+            return UploadCategory::where('slug', 'free')->get();
         });
 
         $orders = Order::with('category')->where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->get();

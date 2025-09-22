@@ -59,7 +59,8 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center justify-content-between">
-                            <h4 class="fw-bold">{{ $category->title }}</h4>
+                            {{-- <h4 class="fw-bold">{{ $category->title }}</h4> --}}
+                            <h4 class="fw-bold">Upload JJ</h4>
                             <h6 class="fw-bold text-success">{{ $category->price }}</h6>
                         </div>
                     </div>
@@ -87,20 +88,20 @@
         <div class="card p-0">
             <div class="card-header">
                 <ul class="nav nav-pills justify-content-start nav-style-3 mb-3" role="tablist">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#history" aria-selected="true">
                             Riwayat Pesanan
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" role="tab" aria-current="page" href="#data-jj">
+                        <a class="nav-link active" data-bs-toggle="tab" role="tab" aria-current="page" href="#data-jj" aria-selected="true">
                             Video JJ Kamu
                         </a>
                     </li>
                 </ul>
                 <div class="card-body p-0">
                     <div class="tab-content">
-                        <div class="tab-pane show active border-0 p-0" id="history" role="tabpanel">
+                        {{-- <div class="tab-pane show active border-0 p-0" id="history" role="tabpanel">
                             @if ($orders->isEmpty())
                                 <p class="text-center text-muted mt-3">Belum ada riwayat order.</p>
                             @else
@@ -132,8 +133,8 @@
                                     @endforeach
                                 </div>
                             @endif
-                        </div>
-                        <div class="tab-pane" id="data-jj" role="tabpanel">
+                        </div> --}}
+                        <div class="tab-pane show active" id="data-jj" role="tabpanel">
                             <div class="accordion" id="displayType">
                                 <div class="accordion-item">
                                     <div class="d-flex gap-2 align-items-center">
