@@ -45,7 +45,7 @@
         <nav class="navbar navbar-dark default">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('templates/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
+                    <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
                 </a>
                 <div>
                     <div class="d-flex align-items-center gap-3">
@@ -74,52 +74,15 @@
                         Login untuk pembuatan Video.
                     </h6>
                     <div class="my-5">
-                        <a href="#menu" class="btn btn-outline-primary me-2" data-bs-toggle="collapse" role="button" aria-expanded="false"
-                            aria-controls="menu">
-                            Lihat Menu
-                        </a>
                         @if (Auth::check())
                             <a href="{{ route(Auth::user()->role->direct) }}" class="btn btn-primary">
                                 Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="btn btn-primary">
-                                Login
+                                UPLOAD JJ DISINI
                             </a>
                         @endif
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="collapse" id="menu">
-                    <div class="row">
-                        @php
-                            use App\Models\UploadCategory;
-
-                            $menus = UploadCategory::rememberCache('menus_all', 3600, function () {
-                                return UploadCategory::all();
-                            });
-                        @endphp
-                        @foreach ($menus as $menu)
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header p-3">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h4 class="fw-bold">{{ $menu->title }}</h4>
-                                            <h6 class="fw-bold text-success">{{ $menu->price }}</h6>
-                                        </div>
-                                    </div>
-                                    <div class="card-body p-3">
-                                        <h6 class="text-muted fw-bold">
-                                            Keterangan:
-                                        </h6>
-                                        <p>
-                                            {{ $menu->description }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
