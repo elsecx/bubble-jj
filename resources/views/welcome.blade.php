@@ -45,7 +45,7 @@
         <nav class="navbar navbar-dark default">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('templates/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
+                    <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
                 </a>
                 <div>
                     <div class="d-flex align-items-center gap-3">
