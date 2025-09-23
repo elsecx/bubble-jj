@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username_1')->unique();
             $table->string('username_2')->nullable();
             $table->string('no_telp')->unique();
+            $table->unsignedInteger('gift_count')->default(0);
             $table->string('picture_1')->nullable();
             $table->string('picture_2')->nullable();
             $table->string('picture_3')->nullable();
