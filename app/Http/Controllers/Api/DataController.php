@@ -13,10 +13,13 @@ class DataController extends Controller
 {
     public function index(Request $request)
     {
-        $allowedOrigin = 'https://livetok.online';
+        $allowedOrigins = [
+            'https://livetok.online',
+            'https://jedagjedug.com',
+        ];
         $origin = $request->headers->get('Origin');
 
-        if ($origin !== $allowedOrigin) {
+        if (!in_array($origin, $allowedOrigins)) {
             return response()->json([
                 'status'  => 'error',
                 'code'    => 403,
