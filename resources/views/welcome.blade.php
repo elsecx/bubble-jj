@@ -45,7 +45,7 @@
         <nav class="navbar navbar-dark default">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" width="150">
+                   <b>MAHAKARYA AGENCY</b>
                 </a>
                 <div>
                     <div class="d-flex align-items-center gap-3">
@@ -62,13 +62,20 @@
                 </div>
             </div>
         </nav>
+        
 
         <div class="container">
+             <div class="card-header text-center" bis_skin_checked="1">
+                        <img src="https://play.livetok.online/assets/img/logo.png" width="150px">
+                        <h1 class="text-white">Mahakarya Agency</h1>
+                        <p class="text-white">~ Pencipta pertama aplikasi bubblephoto ~</p>
+                    </div>
             <div class="row align-items-center justify-content-center text-center">
                 <div class="col-md-9 col-xl-6">
-                    <h1 class="mt-sm-3 text-white mb-4 f-w-600" data-wow-delay="0.2s">
-                        Selamat datang sobat <span class="text-primary">Bubble</span>
-                    </h1>
+                    
+                    <!--<h1 class="mt-sm-3 text-white mb-4 f-w-600" data-wow-delay="0.2s">-->
+                    <!--    Selamat datang sobat <span class="text-primary">Bubble</span>-->
+                    <!--</h1>-->
                     <h6 class="mb-4 text-white opacity-75" data-wow-delay="0.4s">
                         Tempat untuk melakukan pengajuan pembuatan Video Jedag-jedug, Silahkan daftar terlebih dulu lalu
                         Login untuk pembuatan Video.
@@ -80,10 +87,13 @@
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="btn btn-primary">
-                                UPLOAD JJ DISINI
+                                UPLOAD VIDEO JJ DISINI
                             </a>
                         @endif
                     </div>
+                    
+                    
+                 <b style="color:orange">  CS : 0852-8153-1230</b>
                 </div>
             </div>
         </div>
@@ -92,10 +102,10 @@
     <footer class="footer">
         <div class="container">
             <span class="text-secondary">
-                Copyright ©<span id="year"></span>
+                Copyright © 2023
                 <a href="https://www.livetok.online/license.html" target="_blank" class="text-light fw-semibold">
                     PT Digjaya Mahakarya Teknologi
-                </a>. All rights reserved
+                </a> 
             </span>
         </div>
     </footer>

@@ -3,14 +3,26 @@
 
 @section('content')
     <div class="row">
+        <center>
+                    
+                
+                <div class="card-header text-center" bis_skin_checked="1">
+                        <img src="https://play.livetok.online/assets/img/logo.png" width="150px">
+                        <h1>Mahakarya Agency</h1>
+                        <p>Upload video Jedag Jedug untuk tampil di semua host Mahakarya</p>
+                    </div>
+                    
+                    </center>
+                  
         <div class="col-md-6 mx-auto">
             <form id="form-login" action="{{ route('login.user.post') }}" method="POST">
                 @csrf
                 @method('POST')
 
                 <div class="card">
+                    
                     <div class="card-header pb-0 mb-0">
-                        <h1 class="fw-bold">Selamat Datang!</h1>
+                       
                         <p>Silahkan login! Jika belum memiliki akun maka akan dibuatkan otomatis.</p>
                     </div>
 
@@ -23,8 +35,8 @@
                         <div class="mb-3">
                             <label for="no_telp" class="form-label">Nomor Whatsapp</label>
                             <div class="input-group">
-                                <span class="input-group-text">+62</span>
-                                <input type="text" class="form-control" id="no_telp" name="no_telp" placeholder="Masukkan nomor Whatsapp kamu"
+                              
+                                <input type="number" class="form-control" id="no_telp" name="no_telp" placeholder="Masukkan nomor Whatsapp kamu"
                                     value="{{ old('no_telp') }}">
                             </div>
                         </div>

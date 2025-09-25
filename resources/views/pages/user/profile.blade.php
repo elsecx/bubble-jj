@@ -52,8 +52,8 @@
                         <div class="mb-3">
                             <label for="no_telp" class="form-label">No. Whatsapp</label>
                             <div class="input-group">
-                                <span class="input-group-text">+62</span>
-                                <input type="text" class="form-control form-control-sm" id="no_telp" name="no_telp"
+                                
+                                <input type="number" class="form-control form-control-sm" id="no_telp" name="no_telp"
                                     value="{{ auth()->user()->profile->no_telp }}">
                             </div>
                         </div>

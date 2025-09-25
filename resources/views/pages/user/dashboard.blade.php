@@ -4,40 +4,39 @@
 @section('content')
     {{-- Pengaturan Akun --}}
     <section id="profile" class="row">
-        <h3 class="fw-bold mb-3">Pengaturan Akun</h3>
+        <!--<h3 class="fw-bold mb-3">Pengaturan Akun</h3>-->
         <div class="card">
             <div class="card-body mb-0 pb-0">
                 <div class="main-profile-overview d-flex flex-column align-items-center justify-content-center">
+                    <div class="alert alert-primary">Upload foto kamu dengan cara klik kotak photo dibawah ini, agar muncul saat kamu di room host mahakarya</div>
                     <div class="d-flex gap-2 justify-content-center mb-2">
                         @for ($i = 1; $i <= 4; $i++)
                             @php
                                 $picture = Auth::user()->profile->{'picture_' . $i};
                             @endphp
 
+
                             <label for="picture_{{ $i }}">
                                 <img src="{{ $picture ? asset('storage/profiles/' . $picture) : asset('assets/images/profiles/upload.png') }}"
-                                    class="img-thumbnail profile-picture" style="width:65px; height:65px; object-fit:cover; cursor:pointer;">
+                                    class="img-thumbnail profile-picture" style="width:85px; height:65px; object-fit:cover; cursor:pointer;">
                             </label>
 
                             <input type="file" name="picture" id="picture_{{ $i }}"
                                 data-url="{{ route('user.profile.update.picture', $i) }}" accept="image/*" hidden>
                         @endfor
                     </div>
-                    <div class="text-center">
-                        <h5 class="main-profile-name">{{ Auth::user()->name }}</h5>
-                        <p class="main-profile-name-text">{{ Auth::user()->profile->no_telp }}</p>
-                    </div>
+                   
                 </div>
                 <hr />
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label class="form-label">Daftar Akun TikTok</label>
+                        <label class="form-label">Daftar Akun TikTok Kamu</label>
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <strong>Akun 1</strong>: <mark class="fst-italic">{{ Auth::user()->profile->username_1 ?? '-' }}</mark>
+                                <strong>Akun 1</strong>: <i class="fst-italic">{{ Auth::user()->profile->username_1 ?? '-' }}</i>
                             </li>
                             <li class="list-group-item">
-                                <strong>Akun 2</strong>: <mark class="fst-italic">{{ Auth::user()->profile->username_2 ?? '-' }}</mark>
+                                <strong>Akun 2</strong>: <i class="fst-italic">{{ Auth::user()->profile->username_2 ?? '-' }}</i>
                             </li>
                         </ul>
                     </div>
@@ -53,14 +52,14 @@
 
     {{-- Daftar Kategori Upload --}}
     <section id="upload-categories" class="row">
-        <h3 class="fw-bold mb-3">Daftar Kategori Upload</h3>
+        <!--<h3 class="fw-bold mb-3">Daftar Kategori Upload</h3>-->
         @foreach ($categories as $category)
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center justify-content-between">
                             {{-- <h4 class="fw-bold">{{ $category->title }}</h4> --}}
-                            <h4 class="fw-bold">Upload JJ</h4>
+                            <h5 class="fw-bold">Upload Video Jedag Jedug</h5>
                             <h6 class="fw-bold text-success">{{ $category->price }}</h6>
                         </div>
                     </div>
@@ -69,7 +68,8 @@
                             Keterangan:
                         </h6>
                         <p>
-                            {{ $category->description }}
+                            <!--{{ $category->description }}-->
+                            Upload video JJ dengan format MP4 yang sudah jadi dan maksimal 3MB.
                         </p>
                     </div>
                     <div class="card-footer">

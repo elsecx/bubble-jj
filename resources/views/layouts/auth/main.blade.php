@@ -56,10 +56,10 @@
         <footer class="footer">
             <div class="container">
                 <span class="text-muted">
-                    Copyright ©<span id="year"></span>
+                    
                     <a href="https://www.livetok.online/license.html" target="_blank" class="text-dark fw-semibold">
-                        {{ SettingsHelper::get('copyright') }}
-                    </a>. All rights reserved
+                   ~     {{ SettingsHelper::get('copyright') }} ~
+                    </a> 
                 </span>
             </div>
         </footer>
