@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-menu-styles="light" loader="disable"
-    style="--primary-rgb: 181, 71, 226;" data-default-header-styles="color">
+<html lang="en" data-theme-mode="light" data-menu-styles="light" style="--primary-rgb: 190, 144, 48;" data-default-header-styles="light">
 
 <head>
-
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
