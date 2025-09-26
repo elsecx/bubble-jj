@@ -67,7 +67,7 @@
             previewSelector: "#preview-container",
             previewType: "video",
             rules: {
-                max_size: 2.5 * 1024 * 1024, // 2.5MB
+                max_size: 3.5 * 1024 * 1024, // 3.5MB
                 max_duration: 60,
             },
             passwordCheckUrl: "{{ route('password.status') }}",
