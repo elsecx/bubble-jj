@@ -74,7 +74,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('user.upload.view', ['slug' => $category->slug]) }}" class="btn btn-primary spa-link">
-                            Pilih
+                            Upload Video JJ Disini
                         </a>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                                         <h2 class="accordion-header flex-1">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#display-10" aria-expanded="false" aria-controls="display-10">
-                                                10 detik
+                                                10 Koin (10 detik)
                                             </button>
                                         </h2>
                                         <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
@@ -177,7 +177,7 @@
                                         <h2 class="accordion-header flex-1">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#display-20" aria-expanded="false" aria-controls="display-20">
-                                                15 detik
+                                                20 Koin (15 detik)
                                             </button>
                                         </h2>
                                         <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
@@ -213,7 +213,7 @@
                                         <h2 class="accordion-header flex-1">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#display-30" aria-expanded="false" aria-controls="display-30">
-                                                25 detik
+                                                30 Koin (25 detik)
                                             </button>
                                         </h2>
                                         <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
@@ -249,7 +249,7 @@
                                         <h2 class="accordion-header flex-1">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#display-99" aria-expanded="false" aria-controls="display-99">
-                                                60 detik
+                                                99 Koin (60 detik)
                                             </button>
                                         </h2>
                                         <button type="button" class="btn btn-sm btn-danger btn-delete-jj me-2"
