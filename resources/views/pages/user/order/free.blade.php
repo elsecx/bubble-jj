@@ -16,7 +16,7 @@
                 @method('POST')
 
                 <div class="card-header border-bottom">
-                    <h3 class="fw-bold fs-3 lh-1">Upload {{ $menu->title }}</h3>
+                    <h4 class="fw-bold fs-3 lh-1">Upload {{ $menu->title }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -44,8 +44,8 @@
                             S&K (Syarat & Ketentuan):
                         </h5>
                         <ul>
-                            <li>Video harus berdurasi maksimal 60 detik.</li>
-                            <li>Video harus berukuran maksimal 2MB.</li>
+                            <!--<li>Video harus berdurasi maksimal 60 detik.</li>-->
+                            <li>Video harus berukuran maksimal 3MB.</li>
                         </ul>
                     </div>
                 </div>

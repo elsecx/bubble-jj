@@ -20,10 +20,10 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password kamu"
+                                <input type="text" class="form-control" id="password" name="password" placeholder="Masukkan password kamu"
                                     value="{{ old('password') }}">
                                 <button class="btn btn-light" type="button" onclick="togglePassword('password')">
-                                    <i class='fa fa-eye'></i>
+                                    
                                 </button>
                             </div>
                             <span class="form-text">

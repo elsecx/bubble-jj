@@ -4,17 +4,20 @@
             <div class="header-element">
                 <div class="horizontal-logo">
                     <a class="header-logo" href="{{ route('user.dashboard') }}">
-                        <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="logo" class="desktop-logo">
-                        <img src="{{ asset('assets/images/brand-logos/toggle-logo.png') }}" alt="logo" class="toggle-logo">
-                        <img src="{{ asset('assets/images/brand-logos/desktop-dark.png') }}" alt="logo" class="desktop-dark">
-                        <img src="{{ asset('assets/images/brand-logos/toggle-dark.png') }}" alt="logo" class="toggle-dark">
+                        <img src="https://play.livetok.online/assets/img/logo.png" alt="logo" class="desktop-logo">
+                        <img src="https://play.livetok.online/assets/img/logo.png" alt="logo" class="toggle-logo">
+                        <img src="https://play.livetok.online/assets/img/logo.png" alt="logo" class="desktop-dark">
+                        <img src="https://play.livetok.online/assets/img/logo.png" alt="logo" class="toggle-dark">
+                        
+                        <b style="margin-top:-25px;margin-left:40px;position:absolute;color:gold">  Mahakarya Agency</b>
                     </a>
+                  
                 </div>
             </div>
         </div>
         <div class="header-content-right">
             <div class="header-element d-flex align-items-center">
-                <a class="btn btn-danger" href="#!" id="logout-btn">
+                <a class="btn btn-primary" href="#!" id="logout-btn">
                     <i class='mdi mdi-logout'></i>
                     Logout
                 </a>
@@ -22,3 +25,4 @@
         </div>
     </div>
 </header>
+ 
