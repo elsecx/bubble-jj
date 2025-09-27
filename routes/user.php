@@ -11,7 +11,7 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
     Route::controller(OrderController::class)->group(function () {
         Route::prefix('upload')->name('upload.')->group(function () {
             Route::get('/{slug}', 'handleView')->name('view');
-            Route::post('/{slug}', 'handleService')->middleware('password.confirmed')->name('service');
+            Route::post('/{slug}', 'handleService')->name('service');
         });
 
         // Detail and Destroy Order
@@ -22,12 +22,13 @@ Route::middleware(['role:user', 'auth', 'verified'])->prefix('user')->name('user
         });
     });
 
-    Route::middleware('password.confirmed')->prefix('profile')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('view');
-        Route::put('/update', [ProfileController::class, 'update'])->name('update');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::middleware('password.confirmed')->group(function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('view');
+            Route::put('/update', [ProfileController::class, 'update'])->name('update');
+            Route::delete('/jj/{type}', [ProfileController::class, 'destroyVideoJJ'])->name('jj.destroy');
+        });
 
-        Route::post('/picture/{slot}', [ProfileController::class, 'updatePicture'])->name('update.picture');
-
-        Route::delete('/jj/{type}', [ProfileController::class, 'destroyVideoJJ'])->name('jj.destroy');
+        Route::post('/picture/{slot}', [ProfileController::class, 'updatePicture'])->name('updatePicture');
     });
 });
