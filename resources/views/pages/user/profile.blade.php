@@ -16,43 +16,35 @@
                     <h5 class="fw-bold">Edit Akun</h5>
                 </div>
                 <div class="card-body mt-0 pt-0">
+                    <div class="d-flex gap-2 justify-content-center mb-2">
+                        @for ($i = 1; $i <= 4; $i++)
+                            @php
+                                $picture = Auth::user()->profile->{'picture_' . $i};
+                                $src = $picture ? asset('storage/profiles/' . $picture) : asset('assets/images/upload-placeholder.png');
+                            @endphp
+
+                            <label for="picture_{{ $i }}">
+                                <img src="{{ $src }}" class="img-thumbnail" style="width:85px; height:65px; object-fit:cover; cursor:pointer;">
+                            </label>
+
+                            <input type="file" name="picture" id="picture_{{ $i }}" data-url="{{ route('user.profile.updatePicture', $i) }}"
+                                accept="image/*" hidden>
+                        @endfor
+                    </div>
+
+                    <hr />
+
                     <form id="form-profile" action="{{ route('user.profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-
-                        <div class="d-flex gap-2 justify-content-center mb-2">
-                            @for ($i = 1; $i <= 4; $i++)
-                                @php
-                                    $picture = Auth::user()->profile->{'picture_' . $i};
-                                @endphp
-
-                                <label for="picture_{{ $i }}">
-                                    <img src="{{ $picture ? asset('storage/profiles/' . $picture) : asset('storage/profiles/default.jpg') }}"
-                                        class="img-thumbnail profile-picture" style="width:65px; height:65px; object-fit:cover; cursor:pointer;"
-                                        id="preview_{{ $i }}">
-                                </label>
-
-                                <input type="file" name="picture_{{ $i }}" id="picture_{{ $i }}" accept="image/*" hidden>
-                            @endfor
-                        </div>
-
-                        <hr />
-
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control form-control-sm" name="name" id="name" value="{{ auth()->user()->name }}">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control form-control-sm" name="email" id="email" value="{{ auth()->user()->email }}">
-                            <small class="form-text">
-                                Email digunakan untuk memulihkan password yang lupa.
-                            </small>
-                        </div>
-                        <div class="mb-3">
                             <label for="no_telp" class="form-label">No. Whatsapp</label>
                             <div class="input-group">
-                                
+
                                 <input type="number" class="form-control form-control-sm" id="no_telp" name="no_telp"
                                     value="{{ auth()->user()->profile->no_telp }}">
                             </div>
@@ -330,6 +322,42 @@
                         }
                     });
                 }
+            });
+        });
+    </script>
+
+    <script data-partial="1">
+        $('input[type="file"][id^="picture_"]').on('change', function() {
+            let url = $(this).data('url');
+            let file = this.files[0];
+            if (!file) return;
+
+            let formData = new FormData();
+            formData.append('picture', file);
+            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showToast('success', res.message);
+                        location.reload();
+                    } else {
+                        showToast('error', res.message || "Gagal update foto");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422 && xhr.responseJSON.errors) {
+                        const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        showToast('error', errors || "Data yang dimasukkan tidak valid");
+                    } else {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+                },
             });
         });
     </script>

@@ -70,7 +70,6 @@
                 max_size: 3.5 * 1024 * 1024, // 3.5MB
                 max_duration: 60,
             },
-            passwordCheckUrl: "{{ route('password.status') }}",
         });
     </script>
 @endsection

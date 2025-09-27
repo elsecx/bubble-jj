@@ -29,6 +29,9 @@
     <link rel="stylesheet" href="{{ asset('templates/libs/choices.js/public/assets/styles/choices.min.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/libs/glightbox/css/glightbox.min.css') }}">
 
+    <!-- Sweetalert Css -->
+    <link rel="stylesheet" href="{{ asset('templates/libs/sweetalert2/sweetalert2.all.min.js') }}">
+
     <style>
         .footer {
             position: fixed;

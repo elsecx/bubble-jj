@@ -8,24 +8,24 @@
         <div class="card">
             <div class="card-body mb-0 pb-0">
                 <div class="main-profile-overview d-flex flex-column align-items-center justify-content-center">
-                    <div class="alert alert-primary">Upload foto kamu dengan cara klik kotak photo dibawah ini, agar muncul saat kamu di room host mahakarya</div>
+                    <div class="alert alert-primary">Upload foto kamu dengan cara klik kotak photo dibawah ini, agar muncul saat kamu di room host
+                        mahakarya</div>
                     <div class="d-flex gap-2 justify-content-center mb-2">
                         @for ($i = 1; $i <= 4; $i++)
                             @php
                                 $picture = Auth::user()->profile->{'picture_' . $i};
+                                $src = $picture ? asset('storage/profiles/' . $picture) : asset('assets/images/upload-placeholder.png');
                             @endphp
 
-
                             <label for="picture_{{ $i }}">
-                                <img src="{{ $picture ? asset('storage/profiles/' . $picture) : asset('assets/images/profiles/upload.png') }}"
-                                    class="img-thumbnail profile-picture" style="width:85px; height:65px; object-fit:cover; cursor:pointer;">
+                                <img src="{{ $src }}" class="img-thumbnail" style="width:85px; height:65px; object-fit:cover; cursor:pointer;">
                             </label>
 
-                            <input type="file" name="picture" id="picture_{{ $i }}"
-                                data-url="{{ route('user.profile.update.picture', $i) }}" accept="image/*" hidden>
+                            <input type="file" name="picture" id="picture_{{ $i }}" data-url="{{ route('user.profile.updatePicture', $i) }}"
+                                accept="image/*" hidden>
                         @endfor
                     </div>
-                   
+
                 </div>
                 <hr />
                 <div class="row mb-3">
@@ -293,7 +293,6 @@
     <script data-partial="1">
         $('input[type="file"][id^="picture_"]').on('change', function() {
             let url = $(this).data('url');
-            let slot = $(this).attr('id').split('_')[1];
             let file = this.files[0];
             if (!file) return;
 
@@ -301,41 +300,29 @@
             formData.append('picture', file);
             formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-            function updatePicture() {
-                $.ajax({
-                    url: url,
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(res) {
-                        if (res.status === 'success') {
-                            showToast('success', res.message);
-                            location.reload();
-                        } else {
-                            showToast('error', res.message || "Gagal update foto");
-                        }
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 422 && xhr.responseJSON.errors) {
-                            const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
-                            showToast('error', errors || "Data yang dimasukkan tidak valid");
-                        } else {
-                            showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
-                        }
-                    },
-                });
-            }
-
-            $.get("{{ route('password.status') }}", function(res) {
-                if (res.confirmed) {
-                    updatePicture();
-                } else {
-                    confirmPassword(function() {
-                        updatePicture();
-                    })
-                }
-            })
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                    if (res.status === 'success') {
+                        showToast('success', res.message);
+                        location.reload();
+                    } else {
+                        showToast('error', res.message || "Gagal update foto");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422 && xhr.responseJSON.errors) {
+                        const errors = Object.values(xhr.responseJSON.errors).flat().join('<br>');
+                        showToast('error', errors || "Data yang dimasukkan tidak valid");
+                    } else {
+                        showToast('error', xhr.responseJSON?.message || "Terjadi kesalahan, coba lagi.");
+                    }
+                },
+            });
         });
 
         $("#btn-edit").on("click", function(e) {
