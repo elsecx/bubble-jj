@@ -7,7 +7,9 @@ use App\Models\DataJJ;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\JpegEncoder;
 use Intervention\Image\ImageManager;
@@ -27,24 +29,55 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = User::findOrFail(Auth::id());
+        $profile = $user->profile;
+
+        $checkUsername = function ($attribute, $value, $fail) use ($profile) {
+            if (!filled($value)) return;
+
+            $exists = DB::table('profiles')
+                ->where(function ($q) use ($value) {
+                    $q->where('username_1', $value)
+                        ->orWhere('username_2', $value);
+                })
+                ->where('id', '<>', $profile->id)
+                ->exists();
+
+            if ($exists) {
+                $fail("{$attribute} sudah digunakan.");
+            }
+        };
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'no_telp' => 'nullable|string|max:15',
-            'username_1' => 'nullable|string|max:50',
-            'username_2' => 'nullable|string|max:50',
+            'no_telp' => [
+                'nullable',
+                'string',
+                'max:15',
+                Rule::unique('profiles', 'no_telp')->ignore($profile->id),
+            ],
+            'username_1' => [
+                'nullable',
+                'string',
+                'max:50',
+                $checkUsername,
+            ],
+            'username_2' => [
+                'nullable',
+                'string',
+                'max:50',
+                $checkUsername,
+            ],
         ]);
 
         $user->update([
             'name' => $request->name,
         ]);
 
-        $profile = $user->profile;
-        $profile->no_telp = $request->no_telp;
-        $profile->username_1 = $request->username_1;
-        $profile->username_2 = $request->username_2;
-
-        $profile->save();
+        $profile->update([
+            'no_telp'    => $request->no_telp,
+            'username_1' => $request->username_1,
+            'username_2' => $request->username_2,
+        ]);
 
         return response()->json([
             'status'  => 'success',

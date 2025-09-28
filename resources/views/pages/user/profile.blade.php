@@ -56,7 +56,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="username_2" class="form-label">Username Tiktok Kedua</label>
-                            <input type="text" class="form-control" name="username_2" id="username_2"
+                            <input type="text" class="form-control form-control-sm" name="username_2" id="username_2"
                                 placeholder="Masukkan Username tiktok kedua (Opsional)" value="{{ auth()->user()->profile->username_2 }}">
                         </div>
 
