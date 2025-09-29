@@ -34,12 +34,12 @@ class UploadFreeService
             $fileInfo = $getID3->analyze($file->getPathname());
             $duration = isset($fileInfo['playtime_seconds']) ? (float) $fileInfo['playtime_seconds'] : 0;
 
-            if ($duration > 60) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Durasi video melebihi 60 detik.',
-                ], 422);
-            }
+            // if ($duration > 60) {
+            //     return response()->json([
+            //         'status' => 'error',
+            //         'message' => 'Durasi video melebihi 60 detik.',
+            //     ], 422);
+            // }
 
             $path = $file->store('videojj', 'public');
             $filename = basename($path);
