@@ -67,7 +67,7 @@
             previewSelector: "#preview-container",
             previewType: "video",
             rules: {
-                max_size: 3.5 * 1024 * 1024, // 3.5MB
+                max_size: 5 * 1024 * 1024, // 5MB
                 // max_duration: 60,
             },
         });

@@ -18,7 +18,7 @@ class UploadFreeService
     {
         try {
             $request->validate([
-                'file' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-ms-wmv|max:3584', // max 3MB
+                'file' => 'required|mimetypes:video/mp4,video/avi,video/mpeg,video/quicktime,video/x-ms-wmv|max:5120', // max 5MB
                 'display_type' => 'nullable|in:10,20,30,99',
             ]);
 
