@@ -10,25 +10,16 @@ class Profile extends Model
 
     public function setUsername1Attribute($value)
     {
-        $this->attributes['username_1'] = $this->sanitizeUsername($value);
+        $this->attributes['username_1'] = sanitizeUsername($value);
     }
 
     public function setUsername2Attribute($value)
     {
-        $this->attributes['username_2'] = $this->sanitizeUsername($value);
+        $this->attributes['username_2'] = sanitizeUsername($value);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    protected function sanitizeUsername(?string $value): ?string
-    {
-        if (!$value) return null;
-
-        $value = strtolower(trim($value));
-        $value = preg_replace('/^(https?:\/\/)?(www\.)?tiktok\.com\/@/i', '', $value);
-        return ltrim($value, '@');
     }
 }

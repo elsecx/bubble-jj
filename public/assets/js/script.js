@@ -24,6 +24,19 @@ $("#no_telp").on("input", function () {
     this.value = this.value.replace(/[^0-9]/g, "");
 });
 
+// Username input handler
+function sanitizeUsername(value) {
+    if (!value) return null;
+
+    value = value.trim().toLowerCase();
+    value = value.replace(/^(https?:\/\/)?(www\.)?tiktok\.com\/@/i, "");
+    return value.replace(/^@/, "");
+}
+
+$("#username, #username_1, #username_2").on("blur", function () {
+    this.value = sanitizeUsername(this.value) || "";
+});
+
 // Toggle password handler
 function togglePassword(passwordId, toggleBtn) {
     const passwordInput = $("#" + passwordId);
