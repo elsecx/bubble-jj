@@ -23,10 +23,12 @@ class UserLoginController extends Controller
             'no_telp'  => 'required|string|numeric',
         ]);
 
-        $profile = Profile::where('username_1', $request->username)->where('no_telp', $request->no_telp)->first();
+        $username = sanitizeUsername($request->username);
+
+        $profile = Profile::where('username_1', $username)->where('no_telp', $request->no_telp)->first();
 
         // Validation: Username exists but phone number does not match validation
-        if (Profile::where('username_1', $request->username)->where('no_telp', '!=', $request->no_telp)->exists()) {
+        if (Profile::where('username_1', $username)->where('no_telp', '!=', $request->no_telp)->exists()) {
             return response()->json([
                 'status' => 'invalid',
                 'message' => 'Nomor Whatsapp tidak cocok dengan username ini.',
@@ -34,7 +36,7 @@ class UserLoginController extends Controller
         }
 
         // Validation: No_telp exists but username does not match
-        if (Profile::where('no_telp', $request->no_telp)->where('username_1', '!=', $request->username)->exists()) {
+        if (Profile::where('no_telp', $request->no_telp)->where('username_1', '!=', $username)->exists()) {
             return response()->json([
                 'status' => 'invalid',
                 'message' => 'Username tidak cocok dengan Nomor Whatsapp ini.',
@@ -46,7 +48,7 @@ class UserLoginController extends Controller
                 'status' => 'setpassword_required',
                 'message' => 'Akun belum terdaftar! Silahkan lengkapi data',
                 'redirect' => route('password.set.view', [
-                    'username' => $request->username,
+                    'username' => $username,
                     'no_telp' => $request->no_telp,
                 ]),
             ]);

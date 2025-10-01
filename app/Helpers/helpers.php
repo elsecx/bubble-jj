@@ -71,3 +71,14 @@ if (!function_exists('formatDate')) {
       : "{$day} {$month} {$year}";
   }
 }
+
+if (!function_exists('sanitizeUsername')) {
+  function sanitizeUsername(?string $value): ?string
+  {
+    if (!$value) return null;
+
+    $value = strtolower(trim($value));
+    $value = preg_replace('/^(https?:\/\/)?(www\.)?tiktok\.com\/@/i', '', $value);
+    return ltrim($value, '@');
+  }
+}
